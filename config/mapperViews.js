@@ -1,4 +1,59 @@
 module.exports.jsonViewMap = {
+    liq: {
+        fields: {
+            PersonaId: 'personas.idpers',
+            Documento: 'personas.dni',
+            Apellido: 'personas.APELLIDO',
+            Nombre: 'personas.NOMBRE',
+            //ApellidoYNombre: 'personas.apeynom',
+            PersonaCUIL: 'personas.cuil',
+            CargoId: 'cargos.idcargo',
+            ReparticionId: 'cargos.IDREP',
+            Orden: 'cargos.ORDEN',
+            Afiliado: 'cargos.AFILIADO',
+            TipoEmpleoId: 'cargos.idte',
+            SituacionRevistaId: 'cargos.idsitrev',
+            LiquidacionId: 'liq.idliq',
+            Periodo: 'liq.periodo',
+            FechaDev: 'liq.fechadev',
+            TipoLiquidacionId: 'liq.idtipoliq',
+            TipoLiquidacionDescripcion: 'tipoliquidacion.descripcion',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = LIQ.IDCARGO",
+                "inner join tipoliquidacion on tipoliquidacion.idtipoliq = liq.idtipoliq",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ]
+        }
+    },
+    liqItem: {
+        fields: {
+            Id: 'liqitem.idliqitem',
+            LiquidacionId: 'liqitem.idliq', 
+            ConceptoId: 'liqitem.idconcepto',
+            Codigo: 'concepto.codigo',
+            SubCodigo: 'concepto.subcod',
+            TipoConceptoId: 'concepto.idtipoconcepto',
+            Descripcion: 'concepto.desc_boleta',
+            Cantidad: 'liqitem.cantidad',
+            Vencimiento: "to_char(liqitem.vto,'MM/YYYY')",
+            Importe: 'liqitem.imp',
+            ImporteTicket: 'liqitem.impticket',
+            PensionAlimenticia: 'liqitem.penley',
+            EsLey: 'liqitem.esley'
+        },
+        key: { field: "Id" },
+        sql: {
+            fromClause: [
+                "FROM LIQITEM",               
+                "inner join concepto on concepto.idconcepto = liqitem.idconcepto"
+            ]
+        }
+    },
     personaCargoLiq: {
         fields: {
             Id: 'liqitem.idliqitem',
@@ -27,9 +82,9 @@ module.exports.jsonViewMap = {
             TipoConceptoId: 'concepto.idtipoconcepto',
             Descripcion: 'concepto.desc_boleta',
             Cantidad: 'liqitem.cantidad',
-            Vencimiento: 'liqitem.vto',
-            Importe: 'liqitem.imp',
-            ImporteTicket: 'liqitem.impticket',
+            Vencimiento: "to_char(liqitem.vto,'MM/YYYY')",
+            Importe: 'round(liqitem.imp,2)',
+            ImporteTicket: 'round(liqitem.impticket,2)',
             PensionAlimenticia: 'liqitem.penley',
             EsLey: 'liqitem.esley'
         },
