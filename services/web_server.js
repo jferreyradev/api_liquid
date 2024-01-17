@@ -13,7 +13,7 @@ function initialize() {
 
         httpServer.listen(webServerConfig.port, webServerConfig.host)
             .on('listening', () => {
-                console.log(`Web server listening on ${webServerConfig.host}:${webServerConfig.port}`);
+                console.log(`Web server listening on ${process.env.DB || "localhost"}:${process.env.PORT || 3000}`);
                 resolve();
             })
             .on('error', err => {

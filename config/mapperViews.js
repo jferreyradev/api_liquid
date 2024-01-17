@@ -14,8 +14,8 @@ module.exports.jsonViewMap = {
             TipoEmpleoId: 'cargos.idte',
             SituacionRevistaId: 'cargos.idsitrev',
             LiquidacionId: 'liq.idliq',
-            Periodo: 'liq.periodo',
-            FechaDev: 'liq.fechadev',
+            Periodo: "liq.periodo",
+            FechaDev: "liq.fechadev",
             TipoLiquidacionId: 'liq.idtipoliq',
             TipoLiquidacionDescripcion: 'tipoliquidacion.descripcion',
             GrupoAdicionalId: 'liq.idgrupoadi'
@@ -44,12 +44,17 @@ module.exports.jsonViewMap = {
             Importe: 'liqitem.imp',
             ImporteTicket: 'liqitem.impticket',
             PensionAlimenticia: 'liqitem.penley',
-            EsLey: 'liqitem.esley'
+            EsLey: 'liqitem.esley',
+            Periodo: 'liq.periodo',
+            FechaDev: 'liq.fechadev',
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
         },
         key: { field: "Id" },
         sql: {
             fromClause: [
-                "FROM LIQITEM",               
+                "FROM LIQ", 
+                "INNER JOIN LIQITEM ON LIQ.IDLIQ = LIQITEM.IDLIQ",
                 "inner join concepto on concepto.idconcepto = liqitem.idconcepto"
             ]
         }
