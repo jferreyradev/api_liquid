@@ -2,7 +2,8 @@ module.exports = {
   dbPool: {
     user: "US_SUELDO",
     password: "usuario",
-    connectString: "www.servertrancas.duckdns.org:1521/LIQUID",
+    connectString: process.env.DB || "localhost:1521/LIQUID",
+    //connectString: process.env.DB || "trancas.ddns.net:1521/LIQUID",
     poolMin: 10,
     poolMax: 10,
     poolIncrement: 0,
