@@ -2,6 +2,7 @@ const oracledb = require('oracledb');
 const dbConfig = require('../config/database');
 
 async function initialize() {
+    //console.log(dbConfig.dbPool)
     const pool = await oracledb.createPool(dbConfig.dbPool);
     console.log('Conexión a BD establecida.');
 }

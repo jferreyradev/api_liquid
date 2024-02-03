@@ -1,4 +1,111 @@
 module.exports.jsonViewMap = {
+    retenciones: {
+        fields: {
+            Importe: "sum(CASE WHEN (concepto.codigo*1000+concepto.subcod) in (153000,270000,280000,290000,300000)  THEN liqitem.IMP ELSE 0 END)",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on LIQ.IDLIQ = liqitem.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO in (3,6)",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = LIQ.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: 'liq.PERIODO',
+                TipoLiquidacionId: 'liq.IDTIPOLIQ',
+                GrupoAdicionalId: 'liq.IDGRUPOADI'
+            },
+            groupClause: [
+                "group by (liq.periodo, liq.idtipoliq, liq.idgrupoadi)"
+            ]
+
+        },
+    },
+    neto: {
+        fields: {
+            Importe: "sum(CASE WHEN concepto.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMP ELSE liqitem.IMP*(-1) END)",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO <> 5",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = LIQ.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: 'liq.PERIODO',
+                TipoLiquidacionId: 'liq.IDTIPOLIQ',
+                GrupoAdicionalId: 'liq.IDGRUPOADI',
+                IdTe: 'cargos.idte',
+                IdSitRev: 'cargos.idsitrev'
+            },
+            groupClause: [
+                "group by (liq.periodo, liq.idtipoliq, liq.idgrupoadi)"
+            ]
+
+        },
+    },
+    resumenCodigo: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            Orden: "cargos.orden",
+            ApeNom: "personas.APELLIDO||','||Personas.NOMBRE",
+            Importe: "liqitem.IMP",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi',
+            Codigo: 'concepto.codigo',
+            SubCodigo: 'concepto.subcod'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO <> 5",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = LIQ.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+
+        },
+    },
+    resumenliq: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            Orden: "cargos.orden",
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
+            HabCAP: "sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 1 THEN liqitem.IMP ELSE 0 END)",
+            AsignFam: "sum(CASE WHEN concepto.IDTIPOCONCEPTO = 4 THEN liqitem.IMP ELSE 0 END)",
+            Neto: "sum(CASE WHEN concepto.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMP ELSE liqitem.IMP*(-1) END)",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO <> 5",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            groupClause: [
+                "group by (liq.idliq, cargos.orden, personas.apellido, personas.nombre, liq.periodo, liq.idtipoliq, liq.idgrupoadi)",
+                "order by concepto.codigo, concepto.subcod"
+            ]
+        },
+    },
     liq: {
         fields: {
             PersonaId: 'personas.idpers',
@@ -33,7 +140,7 @@ module.exports.jsonViewMap = {
     liqItem: {
         fields: {
             Id: 'liqitem.idliqitem',
-            LiquidacionId: 'liqitem.idliq', 
+            LiquidacionId: 'liqitem.idliq',
             ConceptoId: 'liqitem.idconcepto',
             Codigo: 'concepto.codigo',
             SubCodigo: 'concepto.subcod',
@@ -53,7 +160,7 @@ module.exports.jsonViewMap = {
         key: { field: "Id" },
         sql: {
             fromClause: [
-                "FROM LIQ", 
+                "FROM LIQ",
                 "INNER JOIN LIQITEM ON LIQ.IDLIQ = LIQITEM.IDLIQ",
                 "inner join concepto on concepto.idconcepto = liqitem.idconcepto"
             ]

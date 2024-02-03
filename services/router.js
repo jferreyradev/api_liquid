@@ -41,20 +41,37 @@ app.use(helmet());
 app.use(express.static(__dirname + '/public'));
 
 /*
-const whitelist = ['http://localhost:3000','http://sueldos.duckdns.org:8090'];
+const whitelist = ['http//localhost:3005',
+    'https//localhost:3003',
+    'http//localhost:5173',
+    'http://liq-trancas.surge.sh',
+    'https://liq-trancas.surge.sh',
+    'http://liq-trancas-dev.surge.sh',
+    'https://liq-trancas-dev.surge.sh',
+    'https://liq-dev.surge.sh',
+    'http://servertrancas.duckdns.org:8090',
+    'http://servertrancas.duckdns.org:8091'];
+
+
 const corsOptions = {
     origin: function (origin, callback) {
         console.log(origin);
-        if (whitelist.indexOf(origin) !== -1){
+        if (whitelist.indexOf(origin) !== -1) {
             callback(null, true);
-        }else{
+        } else {
             callback(new Error('Not allowed by CORDS'))
-        }        
+        }
     }
 };
-*/
 
-//app.options('http://localhost:3000', cors())
+/*
+app.use(cors(corsOptions));
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+});
+*/
 
 app.use(cors());
 
@@ -68,18 +85,16 @@ app.route('/en/list').get(control.getEntities);
 
 app.route('/repo/list').get(control.getReps);
 
-//app.route('/sp/*').get(control.execSP);
 app.route('/sp/*').post(control.execSP);
 
 app.route('/fn/*').post(control.execFN);
-//app.route('/fn/*').get(control.execFN);
 
 app.route('/view/*').get(control.getView);
 
 app.route('/repo/*').get(control.getRepo);
 
-app.route('/fileUpload').post(files.post);    
-    
+app.route('/fileUpload').post(files.post);
+
 app.route('/xlsx/*').get(control.getxlsx);
 
 app.route('/txt/*').get(control.getTXT);

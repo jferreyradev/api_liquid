@@ -1,3 +1,4 @@
 module.exports = {
-    port: process.env.PORT || 3000,  
+    port: process.env.HTTP_PORT || 3005,  
+    port_https: process.env.HTTPS_PORT || 3003,  
 };
