@@ -134,7 +134,7 @@ module.exports.jsonViewMap = {
                 "INNER JOIN CARGOS ON CARGOS.IDCARGO = LIQ.IDCARGO",
                 "inner join tipoliquidacion on tipoliquidacion.idtipoliq = liq.idtipoliq",
                 "inner join personas on personas.idpers = cargos.idpers"
-            ]
+            ],
         }
     },
     liqItem: {
@@ -151,11 +151,7 @@ module.exports.jsonViewMap = {
             Importe: 'liqitem.imp',
             ImporteTicket: 'liqitem.impticket',
             PensionAlimenticia: 'liqitem.penley',
-            EsLey: 'liqitem.esley',
-            Periodo: 'liq.periodo',
-            FechaDev: 'liq.fechadev',
-            TipoLiquidacionId: 'liq.idtipoliq',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            EsLey: 'liqitem.esley'
         },
         key: { field: "Id" },
         sql: {
@@ -163,7 +159,12 @@ module.exports.jsonViewMap = {
                 "FROM LIQ",
                 "INNER JOIN LIQITEM ON LIQ.IDLIQ = LIQITEM.IDLIQ",
                 "inner join concepto on concepto.idconcepto = liqitem.idconcepto"
-            ]
+            ],
+            whereFields: {                
+                Periodo: "liq.periodo",
+                TipoLiquidacionId: "liq.idtipoliq",
+                GrupoAdicionalId: "liq.idgrupoadi"
+            }
         }
     },
     personaCargoLiq: {
