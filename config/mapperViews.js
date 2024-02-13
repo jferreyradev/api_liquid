@@ -59,6 +59,7 @@ module.exports.jsonViewMap = {
         fields: {
             LiquidacionId: "liq.idliq",
             Orden: "cargos.orden",
+            Documento: 'personas.dni',
             ApeNom: "personas.APELLIDO||','||Personas.NOMBRE",
             Importe: "liqitem.IMP",
             Periodo: "liq.periodo",
@@ -83,6 +84,7 @@ module.exports.jsonViewMap = {
         fields: {
             LiquidacionId: "liq.idliq",
             Orden: "cargos.orden",
+            Documento: 'personas.dni',
             ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
             HabCAP: "sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 1 THEN liqitem.IMP ELSE 0 END)",
             AsignFam: "sum(CASE WHEN concepto.IDTIPOCONCEPTO = 4 THEN liqitem.IMP ELSE 0 END)",
