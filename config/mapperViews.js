@@ -55,6 +55,35 @@ module.exports.jsonViewMap = {
 
         },
     },
+    netoPermanentes: {
+        fields: {
+            Importe: "sum(CASE WHEN concepto.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMP ELSE liqitem.IMP*(-1) END)",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO <> 5",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = LIQ.IDCARGO and CARGOS.IDTE=1 AND CARGOS.IDSITREV<>4",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: 'liq.PERIODO',
+                TipoLiquidacionId: 'liq.IDTIPOLIQ',
+                GrupoAdicionalId: 'liq.IDGRUPOADI',
+                IdTe: 'cargos.idte',
+                IdSitRev: 'cargos.idsitrev'
+            },
+            groupClause: [
+                "group by (liq.periodo, liq.idtipoliq, liq.idgrupoadi)"
+            ]
+
+        },
+    },
     resumenCodigo: {
         fields: {
             LiquidacionId: "liq.idliq",
