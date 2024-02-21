@@ -1,4 +1,18 @@
 module.exports.jsonViewMap = {
+    periodo: {
+        fields: {
+            Periodo: "tabperiodo.periodo"
+        },
+        sql: {
+            fromClause: [
+                "FROM TABPERIODO"
+            ],
+             whereFields: {
+                Periodo: 'tabperiodo.PERIODO',
+                Activo: 'tabperiodo.activo'
+            },
+        },
+    },
     retenciones: {
         fields: {
             Importe: "sum(CASE WHEN (concepto.codigo*1000+concepto.subcod) in (153000,270000,280000,290000,300000)  THEN liqitem.IMP ELSE 0 END)",
