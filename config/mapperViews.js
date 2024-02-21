@@ -34,7 +34,7 @@ module.exports.jsonViewMap = {
             PersonaDocumento: "p.dni",
             PersonaApellido: "P.APELLIDO",
             PersonaNombre: "P.NOMBRE",
-            SujetoAporte: "sum( case when CON.IDTIPOCONCEPTO = 1 THEN li.imp ELSE 0 END)",          
+            SujetoAporte: "sum(case when CON.IDTIPOCONCEPTO = 1 THEN li.imp ELSE 0 END)",          
             AsignacionFamiliar: "sum( case when CON.IDTIPOCONCEPTO = 4 THEN li.imp ELSE 0 END)",           
             Neto: "sum( case when CON.IDTIPOCONCEPTO in (1,2,4) THEN li.imp else li.imp*(-1) END)"
         },
@@ -47,9 +47,9 @@ module.exports.jsonViewMap = {
                 "inner join concepto con on con.idconcepto = li.idconcepto and con.idtipoconcepto<>5"
             ],
             whereFields: {
-                Periodo: 'liq.PERIODO',
-                TipoLiquidacionId: 'liq.IDTIPOLIQ',
-                GrupoAdicionalId: 'liq.IDGRUPOADI'
+                Periodo: 'l.PERIODO',
+                TipoLiquidacionId: 'l.IDTIPOLIQ',
+                GrupoAdicionalId: 'l.IDGRUPOADI'
             },
            groupClause: [
                 "group by (c.orden, p.dni, p.apellido)"
@@ -188,6 +188,7 @@ module.exports.jsonViewMap = {
             Documento: 'personas.dni',
             ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
             HabCAP: "sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 1 THEN liqitem.IMP ELSE 0 END)",
+            HabSAP: "sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 2 THEN liqitem.IMP ELSE 0 END)",
             AsignFam: "sum(CASE WHEN concepto.IDTIPOCONCEPTO = 4 THEN liqitem.IMP ELSE 0 END)",
             Neto: "sum(CASE WHEN concepto.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMP ELSE liqitem.IMP*(-1) END)",
             Periodo: "liq.periodo",
