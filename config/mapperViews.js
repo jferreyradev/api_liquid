@@ -1,4 +1,33 @@
 module.exports.jsonViewMap = {
+   resumenFdo: {
+        fields: {
+            Orden: "c.orden",
+            PersonaDocumento: "p.dni",
+            PersonaApellido: "P.APELLIDO",
+            PersonaNombre: "P.NOMBRE",
+            SujetoAporte: "sum( case when CON.IDTIPOCONCEPTO = 1 THEN li.imp ELSE 0 END)",          
+            AsignacionFamiliar: "sum( case when CON.IDTIPOCONCEPTO = 4 THEN li.imp ELSE 0 END)",           
+            Neto: "sum( case when CON.IDTIPOCONCEPTO in (1,2,4) THEN li.imp else li.imp*(-1) END)"
+        },
+       sql: {
+            fromClause: [
+                "from liq l",
+                "inner join liqitem li on l.idliq = li.idliq",
+                "inner join cargos c on C.IDCARGO = l.idcargo",
+                "inner join personas p on p.idpers = c.idpers",
+                "inner join concepto con on con.idconcepto = li.idconcepto and con.idtipoconcepto<>5"
+            ],
+            whereFields: {
+                Periodo: 'liq.PERIODO',
+                TipoLiquidacionId: 'liq.IDTIPOLIQ',
+                GrupoAdicionalId: 'liq.IDGRUPOADI'
+            },
+           groupClause: [
+                "group by (c.orden, p.dni, p.apellido)"
+            ]
+       }       
+   },
+    
     periodo: {
         fields: {
             Periodo: "tabperiodo.periodo"
