@@ -52,7 +52,7 @@ module.exports.jsonViewMap = {
                 GrupoAdicionalId: 'l.IDGRUPOADI'
             },
            groupClause: [
-                "group by (c.orden, p.dni, p.apellido)"
+                "group by (c.orden, p.dni, p.apellido, P.NOMBRE)"
             ]
        }       
    },
