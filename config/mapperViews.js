@@ -1,4 +1,33 @@
 module.exports.jsonViewMap = {
+   resumenCodLiq: {
+        fields: {
+            IdTipoConcepto: "CON.IDTIPOCONCEPTO",
+            Codigo: "CON.CODIGO",
+            SubCodigo: "CON.SUBCOD",
+            Descripcion: "CON.desc_boleta",
+            Cantidad: "count(*)",
+            Importe: "sum(li.impticket)",
+            Periodo: "l.periodo",
+            TipoTotal: "grouping(idtipoconcepto)+grouping(desc_boleta)+grouping(l.periodo) "
+        },        
+        sql: {
+            fromClause: [
+                "from liq l",
+                "inner join liqitem li on l.idliq = li.idliq",
+                "inner join cargos c on C.IDCARGO = l.idcargo",
+                "inner join personas p on p.idpers = c.idpers",
+                "inner join concepto con on con.idconcepto = li.idconcepto and CON.IDTIPOCONCEPTO <> 5"
+            ],
+           whereFields: {
+               Periodo: "l.periodo",
+               TipoLiquidacionId: "l.idtipoliq",
+               GrupoAdicionalId: 'l.IDGRUPOADI'
+           },
+            groupClause: [
+                "group by rollup((l.periodo,CON.IDTIPOCONCEPTO),(CON.CODIGO,CON.SUBCOD,CON.desc_boleta))"
+            ]
+        }
+    },
    resumenFdo: {
         fields: {
             Orden: "c.orden",
