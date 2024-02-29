@@ -1,4 +1,18 @@
 module.exports.jsonViewMap = {
+      configServer: {
+        fields: {
+            IdConf: "c.idconf",
+            IdRep: "c.idrep",            
+            Descripcion: "c.descripcion",
+            Ambiente: "c.ambiente",            
+            Cela: "c.cela",
+        },
+        sql: {
+            fromClause: [
+                "from config_server c",                
+            ]           
+        }
+    },
    resumenCodLiq: {
         fields: {
             IdTipoConcepto: "CON.IDTIPOCONCEPTO",
