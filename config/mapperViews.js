@@ -1,19 +1,19 @@
 module.exports.jsonViewMap = {
-      configServer: {
+    configServer: {
         fields: {
             IdConf: "c.idconf",
-            IdRep: "c.idrep",            
+            IdRep: "c.idrep",
             Descripcion: "c.descripcion",
-            Ambiente: "c.ambiente",            
+            Ambiente: "c.ambiente",
             Cela: "c.cela",
         },
         sql: {
             fromClause: [
-                "from config_server c",                
-            ]           
+                "from config_server c",
+            ]
         }
     },
-   resumenCodLiq: {
+    resumenCodLiq: {
         fields: {
             IdTipoConcepto: "CON.IDTIPOCONCEPTO",
             Codigo: "CON.CODIGO",
@@ -23,7 +23,7 @@ module.exports.jsonViewMap = {
             Importe: "sum(li.impticket)",
             Periodo: "l.periodo",
             TipoTotal: "grouping(idtipoconcepto)+grouping(desc_boleta)+grouping(l.periodo) "
-        },        
+        },
         sql: {
             fromClause: [
                 "from liq l",
@@ -32,27 +32,27 @@ module.exports.jsonViewMap = {
                 "inner join personas p on p.idpers = c.idpers",
                 "inner join concepto con on con.idconcepto = li.idconcepto and CON.IDTIPOCONCEPTO <> 5"
             ],
-           whereFields: {
-               Periodo: "l.periodo",
-               TipoLiquidacionId: "l.idtipoliq",
-               GrupoAdicionalId: 'l.IDGRUPOADI'
-           },
+            whereFields: {
+                Periodo: "l.periodo",
+                TipoLiquidacionId: "l.idtipoliq",
+                GrupoAdicionalId: 'l.IDGRUPOADI'
+            },
             groupClause: [
                 "group by rollup((l.periodo,CON.IDTIPOCONCEPTO),(CON.CODIGO,CON.SUBCOD,CON.desc_boleta))"
             ]
         }
     },
-   resumenFdo: {
+    resumenFdo: {
         fields: {
             Orden: "c.orden",
             PersonaDocumento: "p.dni",
             PersonaApellido: "P.APELLIDO",
             PersonaNombre: "P.NOMBRE",
-            SujetoAporte: "sum(case when CON.IDTIPOCONCEPTO = 1 THEN li.imp ELSE 0 END)",          
-            AsignacionFamiliar: "sum( case when CON.IDTIPOCONCEPTO = 4 THEN li.imp ELSE 0 END)",           
+            SujetoAporte: "sum(case when CON.IDTIPOCONCEPTO = 1 THEN li.imp ELSE 0 END)",
+            AsignacionFamiliar: "sum( case when CON.IDTIPOCONCEPTO = 4 THEN li.imp ELSE 0 END)",
             Neto: "sum( case when CON.IDTIPOCONCEPTO in (1,2,4) THEN li.imp else li.imp*(-1) END)"
         },
-       sql: {
+        sql: {
             fromClause: [
                 "from liq l",
                 "inner join liqitem li on l.idliq = li.idliq",
@@ -65,12 +65,11 @@ module.exports.jsonViewMap = {
                 TipoLiquidacionId: 'l.IDTIPOLIQ',
                 GrupoAdicionalId: 'l.IDGRUPOADI'
             },
-           groupClause: [
+            groupClause: [
                 "group by (c.orden, p.dni, p.apellido, P.NOMBRE)"
             ]
-       }       
-   },
-    
+        }
+    },
     periodo: {
         fields: {
             Periodo: "tabperiodo.periodo"
@@ -79,7 +78,7 @@ module.exports.jsonViewMap = {
             fromClause: [
                 "FROM TABPERIODO"
             ],
-             whereFields: {
+            whereFields: {
                 Periodo: 'tabperiodo.PERIODO',
                 Activo: 'tabperiodo.activo'
             },
@@ -278,10 +277,11 @@ module.exports.jsonViewMap = {
                 "INNER JOIN LIQITEM ON LIQ.IDLIQ = LIQITEM.IDLIQ",
                 "inner join concepto on concepto.idconcepto = liqitem.idconcepto"
             ],
-            whereFields: {                
+            whereFields: {
                 Periodo: "liq.periodo",
                 TipoLiquidacionId: "liq.idtipoliq",
-                GrupoAdicionalId: "liq.idgrupoadi"
+                GrupoAdicionalId: "liq.idgrupoadi",
+                LiquidacionId: 'liqitem.idliq',
             }
         }
     },

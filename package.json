@@ -16,11 +16,11 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "helmet": "^4.2.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.2",
     "morgan": "^1.10.0",
     "oracledb": "^5.0.0",
     "pdf-lib": "^1.16.0",
-    "xlsx": "^0.16.9"
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "nodemon": "^2.0.6"
