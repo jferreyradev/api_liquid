@@ -76,7 +76,7 @@ async function createPdf(json) {
 
     // Image
 
-    const pngUrl = './escudo.png'
+    const pngUrl = './Logo.jpg'
 
     const pngImageBytes = fs.readFileSync(pngUrl)
 
