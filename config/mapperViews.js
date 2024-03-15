@@ -16,13 +16,14 @@ module.exports.jsonViewMap = {
     resumenCodLiq: {
         fields: {
             IdTipoConcepto: "CON.IDTIPOCONCEPTO",
+            IdRep: "c.IDREP",
             Codigo: "CON.CODIGO",
             SubCodigo: "CON.SUBCOD",
             Descripcion: "CON.desc_boleta",
             Cantidad: "count(*)",
             Importe: "sum(li.impticket)",
             Periodo: "l.periodo",
-            TipoTotal: "grouping(idtipoconcepto)+grouping(desc_boleta)+grouping(l.periodo) "
+            TipoTotal: "grouping(idtipoconcepto)+grouping(desc_boleta)+grouping(l.periodo)+grouping(c.idrep) "
         },
         sql: {
             fromClause: [
@@ -35,15 +36,17 @@ module.exports.jsonViewMap = {
             whereFields: {
                 Periodo: "l.periodo",
                 TipoLiquidacionId: "l.idtipoliq",
-                GrupoAdicionalId: 'l.IDGRUPOADI'
+                GrupoAdicionalId: 'l.IDGRUPOADI',
+                IdRep: 'c.IDREP'
             },
             groupClause: [
-                "group by rollup((l.periodo,CON.IDTIPOCONCEPTO),(CON.CODIGO,CON.SUBCOD,CON.desc_boleta))"
+                "group by rollup((l.periodo, c.idrep,CON.IDTIPOCONCEPTO),(CON.CODIGO,CON.SUBCOD,CON.desc_boleta))"
             ]
         }
     },
     resumenFdo: {
-        fields: {
+        fields: {            
+            IdRep: "c.IDREP",
             Orden: "c.orden",
             PersonaDocumento: "p.dni",
             PersonaApellido: "P.APELLIDO",
@@ -63,10 +66,11 @@ module.exports.jsonViewMap = {
             whereFields: {
                 Periodo: 'l.PERIODO',
                 TipoLiquidacionId: 'l.IDTIPOLIQ',
-                GrupoAdicionalId: 'l.IDGRUPOADI'
+                GrupoAdicionalId: 'l.IDGRUPOADI',
+                IdRep: 'c.IDREP'
             },
             groupClause: [
-                "group by (c.orden, p.dni, p.apellido, P.NOMBRE)"
+                "group by (c.idrep, c.orden, p.dni, p.apellido, P.NOMBRE)"
             ]
         }
     },
@@ -172,6 +176,7 @@ module.exports.jsonViewMap = {
     resumenCodigo: {
         fields: {
             LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
             Orden: "cargos.orden",
             Documento: 'personas.dni',
             ApeNom: "personas.APELLIDO||','||Personas.NOMBRE",
@@ -197,6 +202,7 @@ module.exports.jsonViewMap = {
     resumenliq: {
         fields: {
             LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
             Orden: "cargos.orden",
             Documento: 'personas.dni',
             ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
@@ -218,8 +224,8 @@ module.exports.jsonViewMap = {
                 "inner join personas on personas.idpers = cargos.idpers"
             ],
             groupClause: [
-                "group by (liq.idliq, cargos.orden, personas.apellido, personas.nombre, liq.periodo, liq.idtipoliq, liq.idgrupoadi)",
-                "order by concepto.codigo, concepto.subcod"
+                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, liq.idtipoliq, liq.idgrupoadi)",
+                "order by cargos.IDREP, cargos.orden"
             ]
         },
     },

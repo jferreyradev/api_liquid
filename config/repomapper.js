@@ -1,6 +1,7 @@
 module.exports.jsonReportes = {
     resumenLiq: {
         fields: {
+            IdRep: "c.idrep",
             Orden: "c.orden",
             PersonaDocumento: "p.dni",
             PersonaApellido: "P.APELLIDO",
@@ -17,7 +18,8 @@ module.exports.jsonReportes = {
             SituacionRevistaId: "c.idsitrev",
             TipoLiquidacionId: "l.idtipoliq",
             GrupoAdicionalId: "l.idgrupoadi",
-            Periodo: "l.periodo"
+            Periodo: "l.periodo",
+            IdRep: "c.idrep",
         },
         key: { field: "" },
         sql: {
@@ -29,8 +31,8 @@ module.exports.jsonReportes = {
                 "inner join concepto con on con.idconcepto = li.idconcepto"
             ],
             groupClause: [
-                "group by rollup ((c.orden,p.dni,P.APELLIDO,P.NOMBRE))",
-                "ORDER BY c.orden, TipoTotal"
+                "group by rollup ((c.idrep,c.orden,p.dni,P.APELLIDO,P.NOMBRE))",
+                "ORDER BY c.idrep,c.orden, TipoTotal"
             ]
         }
     },
