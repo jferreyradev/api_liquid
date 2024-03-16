@@ -76,19 +76,19 @@ async function createPdf(json) {
 
     // Image
 
-    const pngUrl = './Logo.jpg'
+    const jpgUrl = './Logo.jpg'
 
-    const pngImageBytes = fs.readFileSync(pngUrl)
+    const jpgImageBytes = fs.readFileSync(jpgUrl)
 
-    const pngImage = await pdfDoc.embedPng(pngImageBytes)
+    const jpgImage = await pdfDoc.embedJpg(jpgImageBytes)
 
-    const pngDims = pngImage.scale(0.2)
+    const jpgDims = jpgImage.scale(0.2)
 
-    page.drawImage(pngImage, {
-        x: page.getWidth() / 2- pngDims.width + 185 ,
-        y: page.getHeight() / 2 - pngDims.height + 410,
-        width: pngDims.width,
-        height: pngDims.height,
+    page.drawImage(jpgImage, {
+        x: page.getWidth() / 2- jpgDims.width + 185 ,
+        y: page.getHeight() / 2 - jpgDims.height + 410,
+        width: jpgDims.width,
+        height: jpgDims.height,
     })
 
     //
