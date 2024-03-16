@@ -640,13 +640,13 @@ async function getBoletaPDF2(req, res, next) {
 
             // Image
 
-            const pngUrl = './escudo.png'
+            const pngUrl = './Logo.png'
 
             const pngImageBytes = fs.readFileSync(pngUrl)
 
             const pngImage = await pdfDoc.embedPng(pngImageBytes)
 
-            const pngDims = pngImage.scale(1)
+            const pngDims = pngImage.scale(0.5)
 
             page.drawImage(pngImage, {
                 x: page.getWidth() / 2 - pngDims.width / 2,
