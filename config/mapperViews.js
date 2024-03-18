@@ -659,20 +659,21 @@ module.exports.jsonViewMap = {
     boletaCabPie: {
         fields: {
             IdLiq: "l.idliq",
-            c1: "rpad(r.idrep,7) || rpad(r.descripcion,35) || lpad('CUIT ' || substr(to_char(r.cuit),1,2)||'-'||substr(to_char(r.cuit),3,8)||'-'||substr(to_char(r.cuit),11,1), 57 )",
+            c1: "rpad(r.idrep,7) || rpad(r.descripcion,35) || lpad('CUIT ' || substr(to_char(r.cuit),1,2)||'-'||substr(to_char(r.cuit),3,8)||'-'||substr(to_char(r.cuit),11,1), 37 )",
             c2: "rpad(' ',7, ' ') ||'DIRECCION ' || upper(r.direccion)",
-            c3: "rpad(' ',7, ' ') ||'APELLIDO: ' || rpad(upper(p.apellido),18) || 'NOMBRE: ' || rpad(upper(p.nombre),35) ||  lpad('CUIL '|| substr(to_char(p.cuil),1,2)||'-'||substr(to_char(p.cuil),3,8)||'-'||substr(to_char(p.cuil),11,1), 21)",
-            c4: "rpad(' ',7, ' ') ||rpad('ORDEN: ' ||c.ORDEN, 15) || rpad('AFILIADO: '||c.AFILIADO, 18) || rpad('CAT: '||C.CATEGORIA, 10) || rpad('INGRESO: '||to_char(p.fechaingreso,'MM/YYYY'),16) || lpad(c.idte || c.idsitrev || c.idtipoos || c.salario, 33)",
-            c5: "rpad(' ',7, ' ') ||rpad('LIQUIDACION '|| tl.descripcion, 77) ||'PERIODO '||to_char(l.periodo,'MM/YYYY')",
+            c3: "rpad(' ',7, ' ') ||'APELLIDO: ' || rpad(upper(p.apellido),20)",
+            c4: "rpad(' ',7, ' ') ||'NOMBRE: ' || rpad(upper(p.nombre),35) || '         CUIL '|| substr(to_char(p.cuil),1,2)||'-'||substr(to_char(p.cuil),3,8)||'-'||substr(to_char(p.cuil),11,1)",
+            c5: "rpad(' ',7, ' ') ||rpad('ORDEN: ' ||c.ORDEN, 15) || rpad('AFILIADO: '||c.AFILIADO, 18) || rpad(' CAT: '||C.CATEGORIA, 10) || rpad(' INGRESO: '||to_char(p.fechaingreso,'MM/YY'),16) || lpad(c.idte || c.idsitrev || c.idtipoos || c.salario, 12)",
+            c6: "rpad(' ',7, ' ') ||rpad('LIQUIDACION '|| tl.descripcion, 50) ||'PERIODO '||to_char(l.periodo,'MM/YYYY')",
             habcap: "l.habcap",
             habsap: "l.habsap",
             habley: "l.habley",
             descley: "l.descley",
             descvarios: "l.descvarios",
             neto: "l.neto",
-            habtxt: "lpad(to_char(l.habcap+l.habsap+l.habley, '9,999,990.00' ),18,' ')",
-            rettxt: "lpad(to_char(l.descley + l.descvarios, '9,999,990.00' ),18,' ')",
-            netotxt: "lpad(to_char(l.neto, '9,999,990.00' ),18,' ')",
+            habtxt: "lpad(to_char(l.habcap+l.habsap+l.habley, '9,999,990.00' ),16,' ')",
+            rettxt: "lpad(to_char(l.descley + l.descvarios, '9,999,990.00' ),16,' ')",
+            netotxt: "lpad(to_char(l.neto, '9,999,990.00' ),16,' ')",
             filename: "to_char(l.periodo,'MMYYYY')||'_'||substr(tl.descripcion,0,3)||'_'||upper(p.apellido)||'_'||upper(p.nombre)"
         },
         sql: {
@@ -691,10 +692,10 @@ module.exports.jsonViewMap = {
     boletaDetalle: {
         fields: {
             IdLiq: "li.idliq",
-            Cadena: `lpad(con.codigo,3,' ')||'  ' ||lpad(con.subcod,5,' ') ||' '|| rpad(li.descripcion,30,' ') || ' ' ||
-            lpad(li.cantidad,7,' ') || ' ' || lpad(nvl(to_char(li.vto,'mm/yyyy'),' '),10,' ')
-            ||' '||lpad(to_char(sum(case when tc.idtipoconcepto in (1,2,4,7) then li.impticket else 0 end), '9,999,990.00' ),18,' ')
-            ||' '||lpad(to_char(sum(case when tc.idtipoconcepto in (3,6) then li.impticket else 0 end), '9,999,990.00' ),18,' ')`,
+            Cadena: `lpad(con.codigo,3,' ')||' ' ||lpad(con.subcod,5,' ') ||' '|| rpad(li.descripcion,23,' ') || ' ' ||
+            lpad(li.cantidad,6,' ') || ' ' || lpad(nvl(to_char(li.vto,'mm/yy'),' '),6,' ')
+            ||' '||lpad(to_char(sum(case when tc.idtipoconcepto in (1,2,4,7) then li.impticket else 0 end), '9,999,990.00' ),15,' ')
+            ||' '||lpad(to_char(sum(case when tc.idtipoconcepto in (3,6) then li.impticket else 0 end), '9,999,990.00' ),15,' ')`,
             Haberes: "sum(case when tc.idtipoconcepto in (1,2,4,7) then li.impticket else 0 end)",
             Retenciones: "sum(case when tc.idtipoconcepto in (3,6) then li.impticket else 0 end)"
         },
