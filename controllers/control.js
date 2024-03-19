@@ -646,14 +646,14 @@ async function getBoletaPDF2(req, res, next) {
 
             const pngImage = await pdfDoc.embedPng(pngImageBytes)
 
-            const pngDims = pngImage.scale(0.5)
+            const pngDims = pngImage.scale(0.2)
 
             page.drawImage(pngImage, {
                 x: page.getWidth() / 2 - pngDims.width / 2,
                 y: (page.getHeight() - 20) / 2 - pngDims.height / 2 + 145,
                 width: pngDims.width,
                 height: pngDims.height,
-                opacity: 0.3,
+                opacity: 0.2,
                 blendMode: BlendMode.SoftLight
             });
 
