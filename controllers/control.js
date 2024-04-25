@@ -601,7 +601,7 @@ async function getBoletaPDF2(req, res, next) {
 
             cadenapie += line["HABTXT"].toString().padStart(79);
             cadenapie += line["RETTXT"].toString().padStart(19) + '\n\n';
-            cadenapie += 'LIQUIDO: '.toString().padStart(79) + line["NETOTXT"].toString().padStart(19) + '\n';
+            cadenapie += '\nSup. Gobierno de Tucumán  30-67524581-5 ' + 'LIQUIDO: '.toString().padStart(79) + line["NETOTXT"].toString().padStart(19) + '\n';
 
             filename = line['FILENAME'];
 
@@ -621,7 +621,6 @@ async function getBoletaPDF2(req, res, next) {
 
             const liquid = hab - ret;
             
-            cadenapie += '\nSup.Gobierno de Tucumán 30-67524581-5 ';
             cadenapie += '\nRECIBO NRO: '.padStart(77) + idLiq;
 
             const text = cadenacab + '\n' + cadenadet + '\n' + cadenapie;
