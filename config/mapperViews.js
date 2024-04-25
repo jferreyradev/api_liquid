@@ -195,7 +195,7 @@ module.exports.jsonViewMap = {
         sql: {
             fromClause: [
                 "FROM CARGOS",
-                "inner join personas on personas.idpers = cargos.idpers and c.idestadocargo=2"
+                "inner join personas on personas.idpers = cargos.idpers and CARGOS.idestadocargo=2"
             ]
         },
     },
