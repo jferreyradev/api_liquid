@@ -165,7 +165,7 @@ module.exports.jsonViewMap = {
             fromClause: [
                 "FROM LIQ ",
                 "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
-                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and CONCEPTO.IDTIPOCONCEPTO NOT IN (5,7) ",
                 "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
                 "inner join personas on personas.idpers = cargos.idpers"
             ],
@@ -177,6 +177,25 @@ module.exports.jsonViewMap = {
             groupClause: [
                 "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, LIQ.FECHADEV, liq.idtipoliq, liq.idgrupoadi, US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ))",
                 "order by cargos.IDREP, cargos.orden, LIQ.PERIODO, LIQ.FECHADEV"
+            ]
+        },
+    },
+    retencionesCargo: {
+        fields: {
+            CargoId: "cargos.IDCARGO",
+            IdRep : "cargos.IDREP",
+            Orden: "cargos.orden",
+            Afiliado: "cargos.afiliado",
+            Categoria: "cargos.categoria",
+            SitRev: "cargos.idsitrev",
+            Documento: 'personas.dni',
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE"
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM CARGOS",
+                "inner join personas on personas.idpers = cargos.idpers and c.idestadocargo=2"
             ]
         },
     },
