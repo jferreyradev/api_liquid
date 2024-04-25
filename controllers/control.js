@@ -620,7 +620,8 @@ async function getBoletaPDF2(req, res, next) {
             });
 
             const liquid = hab - ret;
-
+            
+            cadenapie += '\nSup.Gobierno de Tucumán 30-67524581-5 ';
             cadenapie += '\nRECIBO NRO: '.padStart(77) + idLiq;
 
             const text = cadenacab + '\n' + cadenadet + '\n' + cadenapie;

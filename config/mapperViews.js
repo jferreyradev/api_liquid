@@ -1,4 +1,4 @@
-module.exports.jsonViewMap = {
+module.exports.jsonViewMap = {    
     configServer: {
         fields: {
             IdConf: "c.idconf",
@@ -12,6 +12,173 @@ module.exports.jsonViewMap = {
                 "from config_server c",
             ]
         }
+    },
+    aportesPat: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
+            Orden: "cargos.orden",
+            Documento: 'personas.dni',
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
+            PatJub: "sum(CASE WHEN CONCEPTO.codigo = 90 THEN liqitem.IMPTICKET ELSE 0 END)",
+            PatOs: "sum(CASE WHEN CONCEPTO.CODIGO = 91 THEN liqitem.IMPTICKET ELSE 0 END)",
+            PatArt: "sum(CASE WHEN concepto.CODIGO = 92 THEN liqitem.IMPTICKET ELSE 0 END)",            
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO = 5",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: "LIQ.periodo",
+                TipoLiquidacionId: "LIQ.idtipoliq",
+                GrupoAdicionalId: 'LIQ.IDGRUPOADI'
+            },
+            groupClause: [
+                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, liq.idtipoliq, liq.idgrupoadi)",
+                "order by cargos.IDREP, cargos.orden"
+            ]
+        },
+    },
+    planillaDetLiq: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
+            Orden: "cargos.orden",
+            Documento: 'personas.dni',
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
+            Codigo: "concepto.CODIGO",
+            SubCodigo: "concepto.SUBCOD",
+            Descripcion: "concepto.desc_boleta",
+            Vto: "liqitem.vto",
+            Importe: "liqitem.impticket",
+            FechaDev: "liq.fechadev",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO <>5",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: "LIQ.periodo",
+                TipoLiquidacionId: "LIQ.idtipoliq",
+                GrupoAdicionalId: 'LIQ.IDGRUPOADI'
+            }
+        },
+    },
+    planillaRet: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
+            Orden: "cargos.orden",
+            Documento: 'personas.dni',
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
+            Codigo: "concepto.CODIGO",
+            SubCodigo: "concepto.SUBCOD",
+            Descripcion: "concepto.desc_boleta",
+            Vto: "liqitem.vto",
+            Importe: "liqitem.impticket",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO in (3,6)",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: "LIQ.periodo",
+                TipoLiquidacionId: "LIQ.idtipoliq",
+                GrupoAdicionalId: 'LIQ.IDGRUPOADI'
+            }
+        },
+    },
+    planillaLey: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
+            Orden: "cargos.orden",
+            Documento: 'personas.dni',
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",           
+            Descripcion: "concepto.desc_boleta",           
+            Importe: "liqitem.impticket",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ and liqitem.ESLEY=1",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO ",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: "LIQ.periodo",
+                TipoLiquidacionId: "LIQ.idtipoliq",
+                GrupoAdicionalId: 'LIQ.IDGRUPOADI'
+            }
+        },
+    },
+    resumenSueldos: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
+            Orden: "cargos.orden",
+            Documento: 'personas.dni',
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
+            MesLiq: "TO_CHAR(LIQ.FECHADEV,'MM/YYYY')",
+            Cat: "US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ)",
+            HabConAp: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 1 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            HabSinAp: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 2 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            AsignFam: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 4 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            DescLey: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 3 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            DescVarios: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 6 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            Neto: "ROUND(sum( case when CONCEPTO.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMPTICKET else liqitem.IMPTICKET*(-1) END),2)",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: "LIQ.periodo",
+                TipoLiquidacionId: "LIQ.idtipoliq",
+                GrupoAdicionalId: 'LIQ.IDGRUPOADI'
+            },
+            groupClause: [
+                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, LIQ.FECHADEV, liq.idtipoliq, liq.idgrupoadi, US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ))",
+                "order by cargos.IDREP, cargos.orden, LIQ.PERIODO, LIQ.FECHADEV"
+            ]
+        },
     },
     resumenCodLiq: {
         fields: {
@@ -668,7 +835,7 @@ module.exports.jsonViewMap = {
             c1: "rpad(r.idrep,7) || rpad(r.descripcion,35) || lpad('CUIT ' || substr(to_char(r.cuit),1,2)||'-'||substr(to_char(r.cuit),3,8)||'-'||substr(to_char(r.cuit),11,1), 57 )",
             c2: "rpad(' ',7, ' ') ||'DIRECCION ' || upper(r.direccion)",
             c3: "rpad(' ',7, ' ') ||'APELLIDO: ' || rpad(upper(p.apellido),18) || 'NOMBRE: ' || rpad(upper(p.nombre),35) ||  lpad('CUIL '|| substr(to_char(p.cuil),1,2)||'-'||substr(to_char(p.cuil),3,8)||'-'||substr(to_char(p.cuil),11,1), 21)",
-            c4: "rpad(' ',7, ' ') ||rpad('ORDEN: ' ||c.ORDEN, 15) || rpad('AFILIADO: '||c.AFILIADO, 18) || rpad('CAT: '||C.CATEGORIA, 10) || rpad('INGRESO: '||to_char(p.fechaingreso,'MM/YYYY'),16) || lpad(c.idte || c.idsitrev || c.idtipoos || c.salario, 33)",
+            c4: "rpad(' ',7, ' ') ||rpad('ORDEN: ' ||c.ORDEN, 15) || rpad('AFILIADO: '||c.AFILIADO, 18) || rpad('CAT: '||C.CATEGORIA, 10) || rpad('INGRESO: '||to_char(p.fechaingreso,'MM/YYYY'),16) || lpad(c.idte || 1 || c.idsitrev || c.idtipoos, 33)",
             c5: "rpad(' ',7, ' ') ||rpad('LIQUIDACION '|| tl.descripcion, 77) ||'PERIODO '||to_char(l.periodo,'MM/YYYY')",
             habcap: "l.habcap",
             habsap: "l.habsap",
