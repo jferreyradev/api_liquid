@@ -104,12 +104,7 @@ module.exports.jsonViewMap = {
                 "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO in (3,6)",
                 "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
                 "inner join personas on personas.idpers = cargos.idpers"
-            ],
-            whereFields: {
-                Periodo: "LIQ.periodo",
-                TipoLiquidacionId: "LIQ.idtipoliq",
-                GrupoAdicionalId: 'LIQ.IDGRUPOADI'
-            }
+            ]
         },
     },
     planillaLey: {
