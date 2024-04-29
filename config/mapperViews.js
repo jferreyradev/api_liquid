@@ -189,8 +189,8 @@ module.exports.jsonViewMap = {
         key: { field: "LiquidacionId" },
         sql: {
             fromClause: [
-                "FROM CARGOS",
-                "inner join personas on personas.idpers = cargos.idpers and cargos.idestadocargo=2"
+                "FROM CARGOS",               
+                "inner join personas on personas.idpers = cargos.idpers and CARGOS.idestadocargo=2"
             ]
         },
     },
