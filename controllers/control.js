@@ -598,7 +598,7 @@ async function getBoletaPDF2(req, res, next) {
             cadenacab += line['C5'] + '\n';
 
             idLiq = line['IDLIQ'];
-            cadenapie += 'Sup. Gobierno de Tucumán  30-67524581-5' + '\n'
+            cadenapie += 'Sup. Gobierno de Tucumán  30-67542808-1' + '\n'
             cadenapie += line["HABTXT"].toString().padStart(79);
             cadenapie += line["RETTXT"].toString().padStart(19) + '\n\n';
             cadenapie += 'LIQUIDO: '.toString().padStart(79) + line["NETOTXT"].toString().padStart(19) + '\n';
