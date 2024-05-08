@@ -992,7 +992,35 @@ module.exports.jsonViewMap = {
             HojaId: "IDHOJANOV"
         }
 
+    },
+    users:{
+        fileds:{
+            Id: 'IDUS',
+            DNI: 'DNI',
+            UserName: 'USUARIO',
+            Password: 'CLAVE',
+            email:'MAIL',
+            Estado: 'IDESTADOUS',
+            Rol: 'ROL',
+            App: 'APP'
+        },
+        sql:{
+            fromClause: [
+                "FROM SG_USUARIO"
+            ]
+        }
+    },
+    logs:{
+        fileds:{
+            Id: 'l.ID',
+            IdUser:'l.IDUSER',
+            Text: 'l.TEXT1',
+            FechaHora: 'l.FECHAHORA'
+        },
+        sql:{
+            fromClause: [
+                "FROM SG_LOG_GRAL l"
+            ]
+        }
     }
-
-
 }

@@ -756,13 +756,14 @@ module.exports.jsonEntityMap = {
             field: "IdLiq"
         }
     },
-    usuarios: {
+    users: {
         table: 'SG_USUARIO',
         fields: {
             Id: 'IDUS',
             DNI: 'DNI',
             UserName: 'USUARIO',
             Password: 'CLAVE',
+            email: 'MAIL',
             Estado: 'IDESTADOUS',
             Rol: 'ROL',
             App: 'APP'
