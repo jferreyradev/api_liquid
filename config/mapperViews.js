@@ -143,6 +143,7 @@ module.exports.jsonViewMap = {
             ApeNom: "personas.APELLIDO||','||personas.NOMBRE",           
             Descripcion: "concepto.desc_boleta",           
             Importe: "liqitem.impticket",
+            FechaDev: "liq.fechadev",
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
             GrupoAdicionalId: 'liq.idgrupoadi'
