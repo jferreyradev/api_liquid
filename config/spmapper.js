@@ -193,5 +193,10 @@ module.exports.jsonStoreProcedure = {
         sp_name: "MOD_REPORTES.ESTABLECE_CONF_BOLETA",
         in_param:["IdLiq", "IdEstado"],
         out_param: ["ValorSalida", "ValorError"]
+    },
+    nuevoUsuario:{
+        sp_name: "MOD_SEG.NUEVO_USUARIO",
+        in_param:["DNI", "Usuario", "Clave","Mail"],
+        out_param: ["ValorSalida", "ValorError"]
     }
 }

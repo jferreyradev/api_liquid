@@ -755,6 +755,32 @@ module.exports.jsonEntityMap = {
         key: {
             field: "IdLiq"
         }
+    }, 
+    usuarios: {
+        table: 'SG_USUARIO',
+        fields: {
+            Id: 'IDUS',
+            DNI: 'DNI',
+            Clave: 'CLAVE',
+            Mail: 'MAIL',
+            IdEstado: 'IDESTADOUS',
+            Rol: 'ROL',
+            App: 'APP'
+        },
+        key: {
+            field: "Id"
+        }
+    }, 
+    logs: {
+        table: 'SG_LOG_GRAL',
+        fields: {
+            Id: 'ID',
+            Text: 'TEXT1',
+            IdUser: 'IDUSER'
+        },
+        key: {
+            field: "Id"
+        }
     }
 }
 
