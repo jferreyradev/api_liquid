@@ -994,7 +994,7 @@ module.exports.jsonViewMap = {
 
     },
     users:{
-        fileds:{
+        fields:{
             Id: 'IDUS',
             DNI: 'DNI',
             UserName: 'USUARIO',
@@ -1011,7 +1011,7 @@ module.exports.jsonViewMap = {
         }
     },
     logs:{
-        fileds:{
+        fields:{
             Id: 'l.ID',
             IdUser:'l.IDUSER',
             Text: 'l.TEXT1',
