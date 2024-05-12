@@ -196,7 +196,12 @@ module.exports.jsonStoreProcedure = {
     },
     nuevoUsuario:{
         sp_name: "MOD_SEG.NUEVO_USUARIO",
-        in_param:["DNI", "Usuario", "Clave","Mail"],
-        out_param: ["ValorSalida", "ValorError"]
+        in_param:["DNI", "Usuario", "Clave","Mail", "Estado", "Rol", "App"],
+        out_param: ["ValorSalida","ValorError"]
+    },
+    nuevoLog:{
+        sp_name: "MOD_SEG.NUEVO_LOG",
+        in_param:["Usuario", "Text"],
+        out_param: ["ValorSalida","ValorError"]
     }
 }
