@@ -13,6 +13,30 @@ module.exports.jsonViewMap = {
             ]
         }
     },
+    resumenPedidoFdo: {
+        fields: {
+            Descripcion: "t.descripcion",
+            Funcionario: "SUM(r.funcionario)",
+            Permanente: "SUM(r.permanente)",
+            Contratado: "SUM(r.contratado)",
+            IdCol: "t.idcol"
+        },
+        sql: {
+            fromClause: [
+                "from US_SUELDO.RESUMEN_PEDIDO_FDO R",
+                "INNER JOIN US_SUELDO.TAB_COL_RESUMEN T ON T.IDCOL = R.IDCOL"
+            ],
+            whereFields: {
+                Periodo: 'l.PERIODO',
+                TipoLiquidacionId: 'l.IDTIPOLIQ',
+                GrupoAdicionalId: 'l.IDGRUPOADI'
+            },
+            groupClause: [
+                "group by ROLLUP((t.tipo),(t.descripcion,t.idcol))",
+				"order by t.tipo,t.idcol"
+            ]
+        }
+    },
     resumenCodLiq: {
         fields: {
             IdTipoConcepto: "CON.IDTIPOCONCEPTO",
