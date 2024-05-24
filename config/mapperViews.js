@@ -107,6 +107,33 @@ module.exports.jsonViewMap = {
             ]
         },
     },
+    planillaRetCPA: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
+            Orden: "cargos.orden",
+            Documento: 'personas.dni',
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
+            Codigo: "concepto.CODIGO",
+            SubCodigo: "concepto.SUBCOD",
+            Descripcion: "concepto.desc_boleta",
+            Vto: "liqitem.vto",
+            Importe: "liqitem.impticket",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and concepto.IDTIPOCONCEPTO in (3,6) AND concepto.codigo in (153,154,245)",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ]
+        },
+    },
     planillaLey: {
         fields: {
             LiquidacionId: "liq.idliq",
@@ -116,6 +143,7 @@ module.exports.jsonViewMap = {
             ApeNom: "personas.APELLIDO||','||personas.NOMBRE",           
             Descripcion: "concepto.desc_boleta",           
             Importe: "liqitem.impticket",
+            FechaDev: "liq.fechadev",
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
             GrupoAdicionalId: 'liq.idgrupoadi'
