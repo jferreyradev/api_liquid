@@ -203,5 +203,10 @@ module.exports.jsonStoreProcedure = {
         sp_name: "MOD_SEG.NUEVO_LOG",
         in_param:["Usuario", "Text"],
         out_param: ["ValorSalida","ValorError"]
+    },
+    setBoleta:{
+        sp_name: "MOD_SEG.SET_CONFBOLETA",
+        in_param:["IdLiq", "Estado"],
+        out_param: ["ValorSalida","ValorError"]
     }
 }
