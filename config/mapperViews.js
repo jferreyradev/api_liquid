@@ -1050,5 +1050,23 @@ module.exports.jsonViewMap = {
                 "FROM SG_LOG_GRAL l"
             ]
         }
+    },
+    bajasLey: {
+        fields: {
+            Documento: "P.dni",
+            ApeNom: "P.APELLIDO||','||P.NOMBRE",
+    	    Sexo: "P.SEXO",
+    	    FechaNac: "P.FECHANAC",
+     	    Edad: "floor(months_between(NL.PERIODO, P.FECHANAC) /12)"
+        },        
+        sql: {
+            fromClause: [
+                "FROM US_SUELDO.personas P ",
+                "inner join US_SUELDO.NOCOBRAN_LEY NL ON NL.DNI = P.DNI"
+            ],
+            whereFields: {
+                Periodo: "NL.periodo"
+            }
+        }
     }
 }
