@@ -231,7 +231,7 @@ module.exports.jsonViewMap = {
             fromClause: [
                 "FROM LIQ ",
                 "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
-                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and CONCEPTO.IDTIPOCONCEPTO NOT IN (5,7) ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and CONCEPTO.IDTIPOCONCEPTO NOT IN (5) ",
                 "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
                 "inner join personas on personas.idpers = cargos.idpers"
             ],
