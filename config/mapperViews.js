@@ -203,6 +203,49 @@ module.exports.jsonViewMap = {
             ]
         },
     },
+    resumenSueldosComp: {
+        fields: {
+            LiquidacionId: "liq.idliq",
+            IdRep : "cargos.IDREP",
+            Orden: "cargos.orden",
+            Documento: 'personas.dni',
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
+            MesLiq: "TO_CHAR(LIQ.FECHADEV,'MM/YYYY')",
+            Cat: "US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ)",
+            HabConAp: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 1 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            InasistRem: "ROUND(sum(case when CON.CODIGO = 160 and CON.SUBCOD = 0 then li.impticket else 0 end),2)",
+            HabConAp2: "ROUND( sum(case when CON.IDTIPOCONCEPTO = 1 THEN li.impticket ELSE 0 END) - sum (case when CON.CODIGO = 160 and CON.SUBCOD = 0 then li.impticket else 0 end) ,2)",
+            HabSinAp: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 2 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            TotalHab:"ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO in (1, 2) THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            AsignFam: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 4 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            DescLey: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 3 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            DescVarios: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 6 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            Neto: "ROUND(sum( case when CONCEPTO.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMPTICKET else liqitem.IMPTICKET*(-1) END),2)",
+            Ley7991: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 7 THEN liqitem.IMPTICKET ELSE 0 END),2)",
+            Periodo: "liq.periodo",
+            TipoLiquidacionId: 'liq.idtipoliq',
+            GrupoAdicionalId: 'liq.idgrupoadi'
+        },
+        key: { field: "LiquidacionId" },
+        sql: {
+            fromClause: [
+                "FROM LIQ ",
+                "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and CONCEPTO.IDTIPOCONCEPTO NOT IN (5,7) ",
+                "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
+                "inner join personas on personas.idpers = cargos.idpers"
+            ],
+            whereFields: {
+                Periodo: "LIQ.periodo",
+                TipoLiquidacionId: "LIQ.idtipoliq",
+                GrupoAdicionalId: 'LIQ.IDGRUPOADI'
+            },
+            groupClause: [
+                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, LIQ.FECHADEV, liq.idtipoliq, liq.idgrupoadi, US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ))",
+                "order by cargos.IDREP, cargos.orden, LIQ.PERIODO, LIQ.FECHADEV"
+            ]
+        },
+    },
     retencionesCargo: {
         fields: {
             CargoId: "cargos.IDCARGO",
