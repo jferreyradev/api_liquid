@@ -213,8 +213,8 @@ module.exports.jsonViewMap = {
             MesLiq: "TO_CHAR(LIQ.FECHADEV,'MM/YYYY')",
             Cat: "US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ)",
             HabConAp: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 1 THEN liqitem.IMPTICKET ELSE 0 END),2)",
-            InasistRem: "ROUND(sum(case when CON.CODIGO = 160 and CON.SUBCOD = 0 then li.impticket else 0 end),2)",
-            HabConAp2: "ROUND( sum(case when CON.IDTIPOCONCEPTO = 1 THEN li.impticket ELSE 0 END) - sum (case when CON.CODIGO = 160 and CON.SUBCOD = 0 then li.impticket else 0 end) ,2)",
+            InasistRem: "ROUND(sum(case when CONCEPTO.CODIGO = 160 and CONCEPTO.SUBCOD = 0 then liqitem.impticket else 0 end),2)",
+            HabConAp2: "ROUND( sum(case when CONCEPTO.IDTIPOCONCEPTO = 1 THEN liqitem.impticket ELSE 0 END) - sum (case when CONCEPTO.CODIGO = 160 and CONCEPTO.SUBCOD = 0 then liqitem.impticket else 0 end) ,2)",
             HabSinAp: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 2 THEN liqitem.IMPTICKET ELSE 0 END),2)",
             TotalHab:"ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO in (1, 2) THEN liqitem.IMPTICKET ELSE 0 END),2)",
             AsignFam: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 4 THEN liqitem.IMPTICKET ELSE 0 END),2)",
@@ -231,7 +231,7 @@ module.exports.jsonViewMap = {
             fromClause: [
                 "FROM LIQ ",
                 "inner join liqitem on liqitem.IDLIQ = liq.IDLIQ",
-                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and CONCEPTO.IDTIPOCONCEPTO NOT IN (5,7) ",
+                "inner join concepto on concepto.IDCONCEPTO = liqitem.IDCONCEPTO and CONCEPTO.IDTIPOCONCEPTO NOT IN (5) ",
                 "INNER JOIN CARGOS ON CARGOS.IDCARGO = liq.IDCARGO",
                 "inner join personas on personas.idpers = cargos.idpers"
             ],
