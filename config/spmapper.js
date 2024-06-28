@@ -208,5 +208,15 @@ module.exports.jsonStoreProcedure = {
         sp_name: "MOD_SEG.SET_CONFBOLETA",
         in_param:["IdLiq", "Estado"],
         out_param: ["ValorSalida","ValorError"]
+    },
+    setEstadoUsuario:{
+        sp_name: "MOD_SEG.ESTADO_USUARIO",
+        in_param:["IdUsuario", "Estado"],
+        out_param: ["ValorSalida","ValorError"]
+    },
+     setClaveUsuario:{
+        sp_name: "MOD_SEG.CLAVE_USUARIO",
+        in_param:["IdUsuario", "Clave"],
+        out_param: ["ValorSalida","ValorError"]
     }
 }
