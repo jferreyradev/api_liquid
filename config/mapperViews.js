@@ -1111,5 +1111,39 @@ module.exports.jsonViewMap = {
                 Periodo: "NL.periodo"
             }
         }
+    },
+    resumenCargos:{
+        fields:{
+            LiquidacionId: "l.idliq",
+            IdRep : "c.IDREP",
+            Orden: "c.orden",
+            Documento: 'p.dni',
+            PersonaCUIL: 'p.cuil',
+            Apellido: "p.apellido",
+            Nombre: "p.nombre",
+            FechaNac: "P.FECHANAC",
+            Sexo: "P.SEXO",
+            Categoria: "c.CATEGORIA",
+            SituacionRevistaId: "c.IDSITREV",
+            Titulo: "(select MAX(SUBSTR(LI.CANTIDAD,1,3)/10 ) from liqitem li where li.idliq = l.idliq and li.IDCONCEPTO = 7  )",
+            TituloEspecial: "(select MAX(SUBSTR(LI.CANTIDAD,1,3)/10 ) from liqitem li where li.idliq = l.idliq and li.IDCONCEPTO = 368  ) ",
+            Antiguedad: "c.ANTIG",
+            VtoEscalafon: "c.VTOESC",
+            Periodo: "l.periodo",
+            TipoLiquidacionId: 'l.idtipoliq',
+            GrupoAdicionalId: 'l.idgrupoadi'
+        },
+        sql:{
+            fromClause:[
+                "from us_sueldo.cargos c ",
+                "inner join US_SUELDO.PERSONAS p on p.idpers = c.IDPERS ",
+                "inner join US_SUELDO.LIQ l on l.IDCARGO = c.IDCARGO and l.PERIODO= l.FECHADEV "
+            ],
+            whereFields:{
+                Periodo: "L.periodo",
+                TipoLiquidacionId: "L.idtipoliq",
+                GrupoAdicionalId: "L.idgrupoadi"
+            }
+        }
     }
 }
