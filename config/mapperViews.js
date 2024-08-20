@@ -1149,5 +1149,32 @@ module.exports.jsonViewMap = {
                 GrupoAdicionalId: "L.idgrupoadi"
             }
         }
+    },
+    novVarias: {
+        fields: {
+            Id: 'IDNOV',
+            IdRep: 'IDREP',
+            Orden: 'ORDEN',
+            Codigo: 'COD',
+            Subcodigo: 'SUBCOD',
+            Param1: 'P1',
+            Param2: 'P2',
+            Vencimiento: 'VTO',
+            Importe: 'IMP',                        
+            Periodo: 'PERIODO',
+            HojaId: 'IDHOJANOV',
+            FechaGrabacion: 'FECHAGRAB',
+            EstadoRegistro: 'IDESTADOREG'
+        },
+        sql: {
+            fromClause: [
+                "FROM NOV_VARIAS"
+            ]
+        },
+        whereFields: {
+            Periodo: "PERIODO",
+            HojaId: "IDHOJANOV",
+            Id: 'IDNOV'
+        }
     }
 }

@@ -220,32 +220,32 @@ module.exports.jsonStoreProcedure = {
         out_param: ["ValorSalida","ValorError"]
     },
     NovVariasIns:{
-        sp_name: "MOD_NOV_VARIAS.SPI_NOV_VARIAS",
+        sp_name: "MOD_NOV.SPI_NOV_VARIAS",
         in_param:["vIDREP", "vORDEN", "vCOD", "vSUBCOD", "vP1", "vP2", "vVTO", "vIMP", "vIDHOJANOV", "vPERIODO"],
         out_param: ["ValorSalida","ValorError"]
     },
     NovVariasUpd:{
-        sp_name: "MOD_NOV_VARIAS.SPU_NOV_VARIAS",
+        sp_name: "MOD_NOV.SPU_NOV_VARIAS",
         in_param:["vIDNOV","vIDREP", "vORDEN", "vCOD", "vSUBCOD", "vP1", "vP2", "vVTO", "vIMP", "vIDHOJANOV", "vPERIODO", "vFECHAGRAB", "vIDESTADOREG"],
         out_param: ["ValorSalida","ValorError"]
     },
     NovVariasDel:{
-        sp_name: "MOD_NOV_VARIAS.SPD_NOV_VARIAS",
+        sp_name: "MOD_NOV.SPD_NOV_VARIAS",
         in_param:["vIDNOV"],
         out_param: ["ValorSalida","ValorError"]
     },
     HojaIns:{
-        sp_name: "MOD_NOV_VARIAS.SPI_HOJA_NOV",
+        sp_name: "MOD_NOV.SPI_HOJA_NOV",
         in_param:["vIDTIPOHOJA", "vPERIODO", "vIDTIPOLIQ", "vIDGRUPOADI", "vIDESTADOHOJA", "vIDTIPOCARGA"],
         out_param: ["ValorSalida","ValorError"]
     },
-     HojaUpd:{
-        sp_name: "MOD_NOV_VARIAS.SPU_HOJA_NOV",
+    HojaUpd:{
+        sp_name: "MOD_NOV.SPU_HOJA_NOV",
         in_param:["vIDHOJANOV","vIDTIPOHOJA", "vPERIODO", "vIDTIPOLIQ", "vIDGRUPOADI", "vIDESTADOHOJA", "vIDTIPOCARGA","vFECHAALTA"],
         out_param: ["ValorSalida","ValorError"]
     },
     HojaDel:{
-        sp_name: "MOD_NOV_VARIAS.SPD_HOJA_NOV",
+        sp_name: "MOD_NOV.SPD_HOJA_NOV",
         in_param:["vIDHOJANOV"],
         out_param: ["ValorSalida","ValorError"]
     }
