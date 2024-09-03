@@ -1093,5 +1093,35 @@ module.exports.jsonViewMap = {
                 "FROM SG_LOG_GRAL l"
             ]
         }
+    },
+    frontMenu: {
+        fields: {
+            Id: 'IDMENU',
+            Descripcion: 'DESCRIPCION',
+            Path: 'PATH'
+        },
+        sql: {
+            fromClause: [
+                "US_SUELDO.SG_MENU"
+            ]
+        }
+    },
+    frontRol: {
+        fields: {
+            IdRol: 'm.IDROL',
+            IdMenu: 'm.IDMENU',
+            Descripcion: 'r.DESCRIPCION',
+            Estado: 'r.estado'
+        },
+        sql: {
+            fromClause: [
+                "from US_SUELDO.SG_ROLES_MENU m ",
+                "inner join US_SUELDO.SG_ROLES r on R.IDROL = M.IDROL ",
+            ]
+        },
+        whereFields: {
+            IdRol: "m.IDROL",
+	    Estado: 'r.estado'
+        }
     }
 }
