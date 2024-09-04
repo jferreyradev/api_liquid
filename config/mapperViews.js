@@ -1189,22 +1189,22 @@ module.exports.jsonViewMap = {
             ]
         }
     },
-    frontRol: {
+    frontMenuRol: {
         fields: {
-            IdRol: 'm.IDROL',
-            IdMenu: 'm.IDMENU',
-            Descripcion: 'r.DESCRIPCION',
-            Estado: 'r.estado'
+            IdRol: 'RM.IDROL',
+            IdMenu: 'M.IDMENU',
+            Descripcion: 'M.DESCRIPCION',
+            Path: 'M.PATH'
         },
         sql: {
             fromClause: [
-                "from US_SUELDO.SG_ROLES_MENU m ",
-                "inner join US_SUELDO.SG_ROLES r on R.IDROL = M.IDROL ",
+		"FROM US_SUELDO.SG_MENU M ",
+		"inner join US_SUELDO.SG_ROLES_MENU RM on RM.IDMENU = M.IDMENU ",
+		"inner join US_SUELDO.SG_ROLES r on R.IDROL = RM.IDROL"
             ]
         },
         whereFields: {
-            IdRol: "m.IDROL",
-	    Estado: 'r.estado'
+            IdRol: "m.IDROL"
         }
     }
 }
