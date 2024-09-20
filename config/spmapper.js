@@ -237,7 +237,12 @@ module.exports.jsonStoreProcedure = {
     HojaIns:{
         sp_name: "MOD_NOV.SPI_HOJA_NOV",
         in_param:["vIDTIPOHOJA", "vPERIODO", "vIDTIPOLIQ", "vIDGRUPOADI", "vIDESTADOHOJA", "vIDTIPOCARGA"],
-        out_param: ["ValorSalida","ValorError"]
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
+    },
+    HojaUpdEstado:{
+        sp_name: "MOD_NOV.SPU_HOJA_NOV_ESTADO",
+        in_param:["vIDHOJANOV", "vIDESTADOHOJA"],
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
     },
     HojaUpd:{
         sp_name: "MOD_NOV.SPU_HOJA_NOV",
