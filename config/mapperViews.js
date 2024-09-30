@@ -1177,6 +1177,41 @@ module.exports.jsonViewMap = {
             Id: 'IDNOV'
         }
     },
+    novAltas: {
+        fields: {
+            Id: 'IDNOV',
+            IdRep: 'IDREP',
+            Orden: 'ORDEN',
+            Afiliado: 'AFI',
+	    DNI: 'DNI',
+		CUIL: 'CUIL',
+		Apellido: 'APE',
+		Nombre: 'NOM',
+		Sexo: 'SEXO',
+		TE: 'TE',
+		CC: 'CC',
+		CAT: 'CAT',
+		Antig: 'ANTIG',
+		VTO: 'VTO',
+		Titulo: 'TITULO',
+		DifCat: 'DIF_CAT',
+		ApJub: 'AJUB',
+		HojaId: 'IDHOJANOV',                  
+            Periodo: 'PERIODO',           
+            FechaGrabacion: 'FECHAGRAB',
+            EstadoRegistro: 'IDESTADOREG'
+        },
+        sql: {
+            fromClause: [
+                "FROM NOV_VARIAS"
+            ]
+        },
+        whereFields: {
+            Periodo: "PERIODO",
+            HojaId: "IDHOJANOV",
+            Id: 'IDNOV'
+        }
+    },	
     frontMenu: {
         fields: {
             Id: 'IDMENU',
