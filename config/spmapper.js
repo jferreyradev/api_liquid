@@ -222,17 +222,17 @@ module.exports.jsonStoreProcedure = {
     NovVariasIns:{
         sp_name: "MOD_NOV.SPI_NOV_VARIAS",
         in_param:["vIDREP", "vORDEN", "vCOD", "vSUBCOD", "vP1", "vP2", "vVTO", "vIMP", "vIDHOJANOV", "vPERIODO"],
-        out_param: ["ValorSalida","ValorError"]
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
     },
     NovVariasUpd:{
         sp_name: "MOD_NOV.SPU_NOV_VARIAS",
         in_param:["vIDNOV","vIDREP", "vORDEN", "vCOD", "vSUBCOD", "vP1", "vP2", "vVTO", "vIMP", "vIDHOJANOV", "vPERIODO", "vFECHAGRAB", "vIDESTADOREG"],
-        out_param: ["ValorSalida","ValorError"]
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
     },
     NovVariasDel:{
         sp_name: "MOD_NOV.SPD_NOV_VARIAS",
         in_param:["vIDNOV"],
-        out_param: ["ValorSalida","ValorError"]
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
     },
     HojaIns:{
         sp_name: "MOD_NOV.SPI_HOJA_NOV",
@@ -247,11 +247,31 @@ module.exports.jsonStoreProcedure = {
     HojaUpd:{
         sp_name: "MOD_NOV.SPU_HOJA_NOV",
         in_param:["vIDHOJANOV","vIDTIPOHOJA", "vPERIODO", "vIDTIPOLIQ", "vIDGRUPOADI", "vIDESTADOHOJA", "vIDTIPOCARGA","vFECHAALTA"],
-        out_param: ["ValorSalida","ValorError"]
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
     },
     HojaDel:{
         sp_name: "MOD_NOV.SPD_HOJA_NOV",
         in_param:["vIDHOJANOV"],
-        out_param: ["ValorSalida","ValorError"]
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
+    },    
+    NovIns:{
+        sp_name: "MOD_NOV.SPI_NOV_ALTAS",
+        in_param:["vREP", "vORD", "vAFI", "vDNI", "vCUIL", "vAPE", "vNOM", "vSEXO", "vTE", "vCC", "vCAT", "vANTIG", "vVTO", "vTITULO", "vDIF_CAT", "vAJUB", "vIDHOJANOV", "vPERIODO"],
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
+    },
+    NovUpd:{
+        sp_name: "MOD_NOV.SPU_NOV_ALTAS",
+        in_param:["vREP", "vORD", "vAFI", "vDNI", "vCUIL", "vAPE", "vNOM", "vSEXO", "vTE", "vCC", "vCAT", "vANTIG", "vVTO", "vTITULO", "vDIF_CAT", "vAJUB", "vPERIODO"],
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
+    },
+    NovAltasEstado:{
+        sp_name: "MOD_NOV.SPU_NOV_ALTAS_ESTADO",
+        in_param:["vIDNOV", "vIDESTADOREG"],
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
+    },
+    NovVariasEstado:{
+        sp_name: "MOD_NOV.SPU_NOV_VARIAS_ESTADO",
+        in_param:["vIDNOV", "vIDESTADOREG"],
+        out_param: ["ValorSalida","ValorError", "vErrorMsg"]
     }
 }
