@@ -1203,7 +1203,7 @@ module.exports.jsonViewMap = {
         },
         sql: {
             fromClause: [
-                "FROM NOV_VARIAS"
+                "FROM NOVALTAS"
             ]
         },
         whereFields: {
