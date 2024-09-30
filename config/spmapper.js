@@ -254,12 +254,12 @@ module.exports.jsonStoreProcedure = {
         in_param:["vIDHOJANOV"],
         out_param: ["ValorSalida","ValorError", "vErrorMsg"]
     },    
-    NovIns:{
+    NovAltasIns:{
         sp_name: "MOD_NOV.SPI_NOV_ALTAS",
         in_param:["vREP", "vORD", "vAFI", "vDNI", "vCUIL", "vAPE", "vNOM", "vSEXO", "vTE", "vCC", "vCAT", "vANTIG", "vVTO", "vTITULO", "vDIF_CAT", "vAJUB", "vIDHOJANOV", "vPERIODO"],
         out_param: ["ValorSalida","ValorError", "vErrorMsg"]
     },
-    NovUpd:{
+    NovAltasUpd:{
         sp_name: "MOD_NOV.SPU_NOV_ALTAS",
         in_param:["vREP", "vORD", "vAFI", "vDNI", "vCUIL", "vAPE", "vNOM", "vSEXO", "vTE", "vCC", "vCAT", "vANTIG", "vVTO", "vTITULO", "vDIF_CAT", "vAJUB", "vPERIODO"],
         out_param: ["ValorSalida","ValorError", "vErrorMsg"]
