@@ -1180,8 +1180,8 @@ module.exports.jsonViewMap = {
     novAltas: {
         fields: {
             Id: 'IDNOV',
-            IdRep: 'IDREP',
-            Orden: 'ORDEN',
+            IdRep: 'REP',
+            Orden: 'ORD',
             Afiliado: 'AFI',
 	    DNI: 'DNI',
 		CUIL: 'CUIL',
@@ -1214,14 +1214,16 @@ module.exports.jsonViewMap = {
     },
     hojaNov: {
         fields: {
-            Id: 'h.IDHOJANOV',
-            TipoHojaId: 'h.IDTIPOHOJA',
-            PeriodoId: 'h.PERIODO',
-            TipoLiquidacionDescripcion: 'TL.DESCRIPCION',
+            FechaCreacion:'H.FECHAALTA',
+            TipoCargaId: 'H.IDTIPOCARGA',
             TipoHojaDescripcion: 'TH.DESCRIPCION',
-            EstadoHojaId: 'h.IDESTADOHOJA',
-            GrupoAdicional: 'h.IDGRUPOADI',
-            TipoLiquidacionId: 'h.IDTIPOLIQ'
+            EstadoHojaId: 'H.IDESTADOHOJA',
+            GrupoAdicional : 'H.IDGRUPOADI',
+            TipoLiquidacionId: 'H.IDTIPOLIQ',
+            TipoLiquidacionDescripcion: 'TL.DESCRIPCION',
+            PeriodoId: 'H.PERIODO',
+            TipoHojaId: 'H.IDTIPOHOJA',
+            Id: 'H.IDHOJANOV'
         },
         sql: {
             fromClause: [
