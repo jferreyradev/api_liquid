@@ -1150,6 +1150,41 @@ module.exports.jsonViewMap = {
             }
         }
     },
+    novhaberes: {        
+        fields: {
+            NroReparticion: 'n.IDREP',
+            ReparticionDescripcion: 'R.DESCRIPCION',
+            NroBoleta: 'n.ORDEN',
+            NroAfiliado: 'n.AFILIADO',
+            Codigo: 'n.CODIGO',
+            Subcodigo: 'n.SUBCOD',
+            Clase: 'n.PARM1',
+            Dias: 'n.PARM2',
+            Vencimiento: 'n.VTO',
+            Importe: 'n.IMPORTE',
+            Documento: 'n.DNI',
+            Apellido: 'n.APELLIDO',
+            Nombre: 'n.NOMBRE',
+            TipoEmpleoId: 'n.TE',
+            TipoEmpleoDescripcion: 'te.DESCRIPCION',
+            SituacionRevistaId: 'n.SITREV',
+            SituacionRevistaDescripcion: 'TR.DESCRIPCION',
+            TipoObraSocialId: 'n.OS',
+            PPP: 'n.PPP',
+            FechaGrabacion: 'n.FECHAGRAB',
+            EstadoRegistro: 'n.IDESTADOREG',
+            HojaId: 'n.IDHOJANOV',
+            Id: 'n.IDNOVHAB'
+        },
+        sql: {
+            fromClause: [
+                "FROM US_SUELDO.NOVHABERES n ",
+                "inner join US_SUELDO.REPARTICION r on r.idrep = n.idrep ",
+                "inner join US_SUELDO.TABTIPOREVISTA tr on TR.IDTIPOREVISTA = N.SITREV ",
+                "inner join US_SUELDO.TABTIPOEMPLEO te on TE.IDTE = N.TE " 
+            ]
+        }
+    },
     novVarias: {
         fields: {
             Id: 'IDNOV',
