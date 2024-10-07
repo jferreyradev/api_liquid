@@ -1211,7 +1211,26 @@ module.exports.jsonViewMap = {
             HojaId: "IDHOJANOV",
             Id: 'IDNOV'
         }
-    },	
+    },
+    hojaNov: {
+        fields: {
+            Id: 'h.IDHOJANOV',
+            TipoHojaId: 'h.IDTIPOHOJA',
+            PeriodoId: 'h.PERIODO',
+            TipoLiquidacionDescripcion: 'TL.DESCRIPCION',
+            TipoHojaDescripcion: 'TH.DESCRIPCION',
+            EstadoHojaId: 'h.IDESTADOHOJA',
+            GrupoAdicional: 'h.IDGRUPOADI',
+            TipoLiquidacionId: 'h.IDTIPOLIQ'
+        },
+        sql: {
+            fromClause: [
+                "from us_sueldo.hoja_nov h ",
+                "inner join US_SUELDO.TABTIPOHOJA th on TH.IDTIPOHOJA = H.IDTIPOHOJA ",
+                "inner join US_SUELDO.TIPOLIQUIDACION tl on TL.IDTIPOLIQ = H.IDTIPOLIQ "
+            ]
+        }
+    },
     frontMenu: {
         fields: {
             Id: 'IDMENU',
