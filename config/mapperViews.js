@@ -1276,7 +1276,7 @@ module.exports.jsonViewMap = {
         },
         sql: {
             fromClause: [
-                "US_SUELDO.SG_MENU"
+                "FROM US_SUELDO.SG_MENU "
             ]
         }
     },
@@ -1296,6 +1296,20 @@ module.exports.jsonViewMap = {
         },
         whereFields: {
             IdRol: "m.IDROL"
+        }
+    },
+    roles: {
+        fields: {
+            IdRol: 'r.IDROL',            
+            Descripcion: 'r.DESCRIPCION'
+        },
+        sql: {
+            fromClause: [
+		"FROM US_SUELDO.SG_ROLES r  "
+            ]
+        },
+        whereFields: {
+            IdRol: "r.IDROL"
         }
     }
 }
