@@ -219,6 +219,11 @@ module.exports.jsonStoreProcedure = {
         in_param:["IdUsuario", "Clave"],
         out_param: ["ValorSalida","ValorError"]
     },
+     setRolUsuario:{
+        sp_name: "MOD_SEG.SET_ROL_USUARIO",
+        in_param:["IdUsuario", "IdRol"],
+        out_param: ["ValorSalida","ValorError"]
+    },
     NovVariasIns:{
         sp_name: "MOD_NOV.SPI_NOV_VARIAS",
         in_param:["vIDREP", "vORDEN", "vCOD", "vSUBCOD", "vP1", "vP2", "vVTO", "vIMP", "vIDHOJANOV", "vPERIODO"],
