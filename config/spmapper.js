@@ -314,6 +314,20 @@ module.exports.jsonStoreProcedure = {
         sp_name: "PKG_PARAM_DDJJ.SPD_PARAM_DDJJ",
         in_param:["vID"],
         out_param: ["vSALIDA","vError", "vErrorMsg"]
-    }	
-
+    },
+    CargaFamIns:{
+        sp_name: "PKG_CARGA_FAMILIAR.SPI_CARGA_FAMILIAR",
+        in_param:["vIDPERS","vDNI", "vAPEYNOM", "vIDTABTIPOREL", "vFECHANAC", "vIDTABTIPOESC", "vGRADO", "vDISCAPACITADO"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    CargaFamUpd:{
+        sp_name: "PKG_CARGA_FAMILIAR.SPU_CARGA_FAMILIAR",
+        in_param:["vIDCARFAM","vIDPERS","vDNI", "vAPEYNOM", "vIDTABTIPOREL", "vFECHANAC", "vIDTABTIPOESC", "vGRADO", "vDISCAPACITADO"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    CargaFamDel:{
+        sp_name: "PKG_CARGA_FAMILIAR.SPD_CARGA_FAMILIAR",
+        in_param:["vIDCARFAM"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    }
 }
