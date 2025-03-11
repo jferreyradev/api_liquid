@@ -1334,9 +1334,9 @@ module.exports.jsonViewMap = {
 	    Ley: 'a.ESLEY', 
 	    Bloq: 'a.BLOQUEADO', 
 	    Haberes: 'sum(a.HABERES)', 
-	    Reten: 'sum(a.RETEN)', 
-	    Neto: 'sum(a.NETO)',
-	    Cantidad: 'count(l.idliq)'
+	    Reten: 'sum(RETEN)', 
+	    Neto: 'sum(NETO)',
+	    Cantidad: 'count(idliq)'
         },        
         sql: {
             fromClause: [
@@ -1352,5 +1352,45 @@ module.exports.jsonViewMap = {
                 "group by a.ESLEY, a.BLOQUEADO"
             ]
         }
-    }
+    },
+     txtIPSST:{
+	    fields: {		    
+		    Cadena: 't.cadena'
+	        },        
+        sql: {
+            fromClause: [
+                "from us_sueldo.ipsst_det t "
+            ],
+            whereFields: {
+		idCab: 't.idcab'
+            }
+        }
+    },
+    resumenIPSST: {
+	fields: {		    
+		TipoLiquidacionId: 'l.IDTIPOLIQ', 
+		GrupoAdicionalId: 'L.IDGRUPOADI', 
+		Periodo: 'L.PERIODO', 
+		FechaDev: 'L.FECHADEV', 
+		Codigo: 'T.CODIGO', 
+		SubCod: 'T.SUBCOD', 
+		DescBoleta: 'T.DESC_BOLETA', 
+		IdCab: 't.idcab'
+	        },        
+        sql: {
+            fromClause: [
+                "from us_sueldo.ipsst_det t ",
+		"inner join us_sueldo.liq l on l.idliq = t.idliq "
+            ],
+            whereFields: {
+		Periodo: 'l.PERIODO',
+                TipoLiquidacionId: 'l.IDTIPOLIQ',
+                GrupoAdicionalId: 'l.IDGRUPOADI'
+            },
+	    groupClause: [
+                "group by rollup((L.IDTIPOLIQ, L.IDGRUPOADI, L.PERIODO, L.FECHADEV), (T.CODIGO, T.SUBCOD, T.DESC_BOLETA, t.idcab)) ",
+		"order by l.idtipoliq, l.idgrupoadi, L.PERIODO, l.fechadev, t.codigo, t.subcod"
+            ]
+        }
+    }	
 }
