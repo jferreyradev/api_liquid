@@ -1312,5 +1312,45 @@ module.exports.jsonViewMap = {
         whereFields: {
             IdRol: "r.IDROL"
         }
+    },
+    acredBco: {
+        fields: {
+            Cadena: "a.cadena"
+        },        
+        sql: {
+            fromClause: [
+                "FROM us_sueldo.ACRED_ARCHIVO a ",
+                "inner join us_sueldo.liq l on l.idliq = a.idliq"
+            ],
+            whereFields: {
+		Periodo: 'l.PERIODO',
+                TipoLiquidacionId: 'l.IDTIPOLIQ',
+                GrupoAdicionalId: 'l.IDGRUPOADI'
+            }
+        }
+    },
+    resumenAcredBco:{
+	fields: {
+	    Ley: 'a.ESLEY', 
+	    Bloq: 'a.BLOQUEADO', 
+	    Haberes: 'sum(a.HABERES)', 
+	    Reten: 'sum(RETEN)', 
+	    Neto: 'sum(NETO)',
+	    Cantidad: 'count(idliq)'
+        },        
+        sql: {
+            fromClause: [
+                "FROM US_SUELDO.ACRED_RESUMEN a ",
+		"inner join liq l on l.idliq = a.idliq and a.cbu <> 0 "
+            ],
+            whereFields: {
+		Periodo: 'l.PERIODO',
+                TipoLiquidacionId: 'l.IDTIPOLIQ',
+                GrupoAdicionalId: 'l.IDGRUPOADI'
+            },
+	    groupClause: [
+                "group by a.ESLEY, a.BLOQUEADO"
+            ]
+        }
     }
 }
