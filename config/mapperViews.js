@@ -1334,9 +1334,9 @@ module.exports.jsonViewMap = {
 	    Ley: 'a.ESLEY', 
 	    Bloq: 'a.BLOQUEADO', 
 	    Haberes: 'sum(a.HABERES)', 
-	    Reten: 'sum(RETEN)', 
-	    Neto: 'sum(NETO)',
-	    Cantidad: 'count(idliq)'
+	    Reten: 'sum(a.RETEN)', 
+	    Neto: 'sum(a.NETO)',
+	    Cantidad: 'count(l.idliq)'
         },        
         sql: {
             fromClause: [
