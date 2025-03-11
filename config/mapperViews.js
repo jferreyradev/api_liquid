@@ -25,7 +25,8 @@ module.exports.jsonViewMap = {
             PatArt: "sum(CASE WHEN concepto.CODIGO = 92 THEN liqitem.IMPTICKET ELSE 0 END)",            
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            GrupoAdicionalId: 'liq.idgrupoadi',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -42,7 +43,7 @@ module.exports.jsonViewMap = {
                 GrupoAdicionalId: 'LIQ.IDGRUPOADI'
             },
             groupClause: [
-                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, liq.idtipoliq, liq.idgrupoadi)",
+                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, liq.idtipoliq, liq.idgrupoadi,CARGOS.nrogral)",
                 "order by cargos.IDREP, cargos.orden"
             ]
         },
@@ -64,7 +65,8 @@ module.exports.jsonViewMap = {
             FechaDev: "liq.fechadev",
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            GrupoAdicionalId: 'liq.idgrupoadi',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -98,7 +100,8 @@ module.exports.jsonViewMap = {
             Importe: "liqitem.impticket",
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            GrupoAdicionalId: 'liq.idgrupoadi',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -125,7 +128,8 @@ module.exports.jsonViewMap = {
             Importe: "liqitem.impticket",
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            GrupoAdicionalId: 'liq.idgrupoadi',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -150,7 +154,8 @@ module.exports.jsonViewMap = {
             FechaDev: "liq.fechadev",
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            GrupoAdicionalId: 'liq.idgrupoadi',
+	    UniOrg: 'c.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -185,7 +190,8 @@ module.exports.jsonViewMap = {
             Neto: "ROUND(sum( case when CONCEPTO.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMPTICKET else liqitem.IMPTICKET*(-1) END),2)",
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            GrupoAdicionalId: 'liq.idgrupoadi',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -202,7 +208,7 @@ module.exports.jsonViewMap = {
                 GrupoAdicionalId: 'LIQ.IDGRUPOADI'
             },
             groupClause: [
-                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, LIQ.FECHADEV, liq.idtipoliq, liq.idgrupoadi, US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ))",
+                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, LIQ.FECHADEV, liq.idtipoliq, liq.idgrupoadi, US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ), CARGOS.nrogral)",
                 "order by cargos.IDREP, cargos.orden, LIQ.PERIODO, LIQ.FECHADEV"
             ]
         },
@@ -229,7 +235,8 @@ module.exports.jsonViewMap = {
 	    DescJubAdic: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 3 AND  CONCEPTO.CODIGO = 169 and CONCEPTO.SUBCOD = 1 THEN liqitem.IMPTICKET ELSE 0 END),2)",
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            GrupoAdicionalId: 'liq.idgrupoadi',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -246,7 +253,7 @@ module.exports.jsonViewMap = {
                 GrupoAdicionalId: 'LIQ.IDGRUPOADI'
             },
             groupClause: [
-                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, LIQ.FECHADEV, liq.idtipoliq, liq.idgrupoadi, US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ))",
+                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, LIQ.FECHADEV, liq.idtipoliq, liq.idgrupoadi, US_SUELDO.F_OBTIENE_CATEGORIA(LIQ.IDLIQ), CARGOS.nrogral)",
                 "order by cargos.IDREP, cargos.orden, LIQ.PERIODO, LIQ.FECHADEV"
             ]
         },
@@ -260,7 +267,8 @@ module.exports.jsonViewMap = {
             Categoria: "cargos.categoria",
             SitRev: "cargos.idsitrev",
             Documento: 'personas.dni',
-            ApeNom: "personas.APELLIDO||','||personas.NOMBRE"
+            ApeNom: "personas.APELLIDO||','||personas.NOMBRE",
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -280,6 +288,7 @@ module.exports.jsonViewMap = {
             Cantidad: "count(*)",
             Importe: "sum(li.impticket)",
             Periodo: "l.periodo",
+	    UniOrg: 'c.nrogral',
             TipoTotal: "grouping(idtipoconcepto)+grouping(desc_boleta)+grouping(l.periodo)+grouping(c.idrep) "
         },
         sql: {
@@ -297,7 +306,7 @@ module.exports.jsonViewMap = {
                 IdRep: 'c.IDREP'
             },
             groupClause: [
-                "group by rollup((l.periodo, c.idrep,CON.IDTIPOCONCEPTO),(CON.CODIGO,CON.SUBCOD,CON.desc_boleta))"
+                "group by rollup((l.periodo, c.idrep,CON.IDTIPOCONCEPTO, c.nrogral),(CON.CODIGO,CON.SUBCOD,CON.desc_boleta))"
             ]
         }
     },
@@ -310,7 +319,8 @@ module.exports.jsonViewMap = {
             PersonaNombre: "P.NOMBRE",
             SujetoAporte: "sum(case when CON.IDTIPOCONCEPTO = 1 THEN li.imp ELSE 0 END)",
             AsignacionFamiliar: "sum( case when CON.IDTIPOCONCEPTO = 4 THEN li.imp ELSE 0 END)",
-            Neto: "sum( case when CON.IDTIPOCONCEPTO in (1,2,4) THEN li.imp else li.imp*(-1) END)"
+            Neto: "sum( case when CON.IDTIPOCONCEPTO in (1,2,4) THEN li.imp else li.imp*(-1) END)",
+	    UniOrg: 'c.nrogral'
         },
         sql: {
             fromClause: [
@@ -327,7 +337,7 @@ module.exports.jsonViewMap = {
                 IdRep: 'c.IDREP'
             },
             groupClause: [
-                "group by (c.idrep, c.orden, p.dni, p.apellido, P.NOMBRE)"
+                "group by (c.idrep, c.orden, p.dni, p.apellido, P.NOMBRE, c.nrogral)"
             ]
         }
     },
@@ -442,7 +452,8 @@ module.exports.jsonViewMap = {
             TipoLiquidacionId: 'liq.idtipoliq',
             GrupoAdicionalId: 'liq.idgrupoadi',
             Codigo: 'concepto.codigo',
-            SubCodigo: 'concepto.subcod'
+            SubCodigo: 'concepto.subcod',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -467,6 +478,7 @@ module.exports.jsonViewMap = {
             HabSAP: "sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 2 THEN liqitem.IMP ELSE 0 END)",
             AsignFam: "sum(CASE WHEN concepto.IDTIPOCONCEPTO = 4 THEN liqitem.IMP ELSE 0 END)",
             Neto: "sum(CASE WHEN concepto.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMP ELSE liqitem.IMP*(-1) END)",
+	    UniOrg: 'CARGOS.nrogral',
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
             GrupoAdicionalId: 'liq.idgrupoadi'
@@ -481,7 +493,7 @@ module.exports.jsonViewMap = {
                 "inner join personas on personas.idpers = cargos.idpers"
             ],
             groupClause: [
-                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, liq.idtipoliq, liq.idgrupoadi)",
+                "group by (liq.idliq, cargos.IDREP, cargos.orden, personas.dni, personas.apellido, personas.nombre, liq.periodo, liq.idtipoliq, liq.idgrupoadi, CARGOS.nrogral)",
                 "order by cargos.IDREP, cargos.orden"
             ]
         },
@@ -505,7 +517,8 @@ module.exports.jsonViewMap = {
             FechaDev: "liq.fechadev",
             TipoLiquidacionId: 'liq.idtipoliq',
             TipoLiquidacionDescripcion: 'tipoliquidacion.descripcion',
-            GrupoAdicionalId: 'liq.idgrupoadi'
+            GrupoAdicionalId: 'liq.idgrupoadi',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -580,7 +593,8 @@ module.exports.jsonViewMap = {
             Importe: 'round(liqitem.imp,2)',
             ImporteTicket: 'round(liqitem.impticket,2)',
             PensionAlimenticia: 'liqitem.penley',
-            EsLey: 'liqitem.esley'
+            EsLey: 'liqitem.esley',
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: { field: "Id" },
         sql: {
@@ -672,7 +686,8 @@ module.exports.jsonViewMap = {
             TipoObraSocialDescripcion: "tabtipoos.DESCRIPCION",
             TipoLiquidacionId: "cargos.IDTIPOLIQ",
             TipoLiquidacionDescripcion: "tipoliquidacion.DESCRIPCION",
-            Salario: "cargos.SALARIO"
+            Salario: "cargos.SALARIO",
+	    UniOrg: 'CARGOS.nrogral'
         },
         key: {
             field: "Id"
@@ -897,7 +912,8 @@ module.exports.jsonViewMap = {
             TipoLiquidacionDescripcion: "tl.descripcion",
             GrupoAdicionalId: "r.NROADICIONAL",
             Neto: "r.NETO",
-            Estado: "r.IDESTADO"
+            Estado: "r.IDESTADO",
+	    UniOrg: 'c.nrogral'
         },
         key: {},
         sql: {
@@ -1136,7 +1152,8 @@ module.exports.jsonViewMap = {
             VtoEscalafon: "c.VTOESC",
             Periodo: "l.periodo",
             TipoLiquidacionId: 'l.idtipoliq',
-            GrupoAdicionalId: 'l.idgrupoadi'
+            GrupoAdicionalId: 'l.idgrupoadi',
+	    UniOrg: 'c.nrogral'
         },
         sql:{
             fromClause:[
