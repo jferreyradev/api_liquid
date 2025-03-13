@@ -155,7 +155,7 @@ module.exports.jsonViewMap = {
             Periodo: "liq.periodo",
             TipoLiquidacionId: 'liq.idtipoliq',
             GrupoAdicionalId: 'liq.idgrupoadi',
-	    UniOrg: 'c.nrogral'
+	    UniOrg: 'cargos.nrogral'
         },
         key: { field: "LiquidacionId" },
         sql: {
@@ -230,7 +230,7 @@ module.exports.jsonViewMap = {
             AsignFam: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 4 THEN liqitem.IMPTICKET ELSE 0 END),2)",
             DescLey: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 3 THEN liqitem.IMPTICKET ELSE 0 END),2)",
             DescVarios: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 6 THEN liqitem.IMPTICKET ELSE 0 END),2)",
-            Neto: "ROUND(sum( case when CONCEPTO.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMPTICKET else liqitem.IMPTICKET*(-1) END),2)",
+            Neto: "ROUND(sum( case when CONCEPTO.IDTIPOCONCEPTO in (1,2,4) THEN liqitem.IMPTICKET else 0 END) - sum( case when CONCEPTO.IDTIPOCONCEPTO in (3,6) THEN liqitem.IMPTICKET else 0 END) ,2)",
             Ley7991: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 7 THEN liqitem.IMPTICKET ELSE 0 END),2)",
 	    DescJubAdic: "ROUND(sum(CASE WHEN CONCEPTO.IDTIPOCONCEPTO = 3 AND  CONCEPTO.CODIGO = 169 and CONCEPTO.SUBCOD = 1 THEN liqitem.IMPTICKET ELSE 0 END),2)",
             Periodo: "liq.periodo",
@@ -1392,6 +1392,7 @@ module.exports.jsonViewMap = {
 		Codigo: 'T.CODIGO', 
 		SubCod: 'T.SUBCOD', 
 		DescBoleta: 'T.DESC_BOLETA', 
+		Importe: 'sum(t.impticket)',
 		IdCab: 't.idcab'
 	        },        
         sql: {
@@ -1405,7 +1406,7 @@ module.exports.jsonViewMap = {
                 GrupoAdicionalId: 'l.IDGRUPOADI'
             },
 	    groupClause: [
-                "group by rollup((L.IDTIPOLIQ, L.IDGRUPOADI, L.PERIODO, L.FECHADEV), (T.CODIGO, T.SUBCOD, T.DESC_BOLETA, t.idcab)) ",
+                "group by (L.IDTIPOLIQ, L.IDGRUPOADI, L.PERIODO, L.FECHADEV, T.CODIGO, T.SUBCOD, T.DESC_BOLETA, t.idcab) ",
 		"order by l.idtipoliq, l.idgrupoadi, L.PERIODO, l.fechadev, t.codigo, t.subcod"
             ]
         }
