@@ -283,5 +283,55 @@ module.exports.jsonStoreProcedure = {
         sp_name: "MOD_NOV.SPU_NOV_VARIAS_ESTADO",
         in_param:["vIDNOV", "vIDESTADOREG"],
         out_param: ["ValorSalida","ValorError", "vErrorMsg"]
+    },
+    PersonaIns:{
+        sp_name: "MOD_PERSONAS.SPI_PERSONA",
+        in_param:["vDNI", "vAPELLIDO", "vCUIL", "vSEXO", "vFECHANAC", "vDOMICILIO", "vNRO", "vLOCALIDAD", "vPROVINCIA", "vCODPOSTAL", "vFECHAINGRESO", "vTELEFONO", "vEMAIL", "vNOMBRE",  "vIDTIPODOC", "vIDESTCIVIL", "vPAIS", "vPROVINCIA", "vLOCALIDAD", "vPISO", "vDPTO", "vCUENTA", "vCBU"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },   
+    PersonaUpd:{
+        sp_name: "MOD_PERSONAS.SPU_PERSONA",
+        in_param:["vIDPERS","vDNI", "vAPELLIDO", "vCUIL", "vSEXO", "vFECHANAC", "vDOMICILIO", "vNRO", "vLOCALIDAD", "vPROVINCIA", "vCODPOSTAL", "vFECHAINGRESO", "vTELEFONO", "vEMAIL", "vNOMBRE",  "vIDTIPODOC", "vIDESTCIVIL", "vPAIS", "vPROVINCIA", "vLOCALIDAD", "vPISO", "vDPTO", "vCUENTA", "vCBU"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    PersonaDel:{
+        sp_name: "MOD_PERSONAS.SPD_PERSONA",
+        in_param:["vIDPERS"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    ddjjIns :{
+        sp_name: "PKG_PARAM_DDJJ.SPI_PARAM_DDJJ",
+        in_param:["vPERIODO", "vPERIODO_HASTA", "vAPJUB_MIN", "vAPJUB_MAX", "vAPJUB_PORC", "vCONTJUB_MAX", "vCONTJUB_PORC", "vAPOS_MIN", "vAPOS_MAX", "vCONTOS_MIN", "vCONTOS_MAX"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    ddjjUpd :{
+        sp_name: "PKG_PARAM_DDJJ.SPU_PARAM_DDJJ",
+        in_param:["vID","vPERIODO", "vPERIODO_HASTA", "vAPJUB_MIN", "vAPJUB_MAX", "vAPJUB_PORC", "vCONTJUB_MAX", "vCONTJUB_PORC", "vAPOS_MIN", "vAPOS_MAX", "vCONTOS_MIN", "vCONTOS_MAX"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    ddjjDel :{
+        sp_name: "PKG_PARAM_DDJJ.SPD_PARAM_DDJJ",
+        in_param:["vID"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    CargaFamIns:{
+        sp_name: "PKG_CARGA_FAMILIAR.SPI_CARGA_FAMILIAR",
+        in_param:["vIDPERS","vDNI", "vAPEYNOM", "vIDTABTIPOREL", "vFECHANAC", "vIDTABTIPOESC", "vGRADO", "vDISCAPACITADO"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    CargaFamUpd:{
+        sp_name: "PKG_CARGA_FAMILIAR.SPU_CARGA_FAMILIAR",
+        in_param:["vIDCARFAM","vIDPERS","vDNI", "vAPEYNOM", "vIDTABTIPOREL", "vFECHANAC", "vIDTABTIPOESC", "vGRADO", "vDISCAPACITADO"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    CargaFamDel:{
+        sp_name: "PKG_CARGA_FAMILIAR.SPD_CARGA_FAMILIAR",
+        in_param:["vIDCARFAM"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    AsignaSalario:{
+        sp_name: "PKG_CARGA_FAMILIAR.SP_ASIGNA_SALARIO",
+        in_param:["vIDCARGO","vASIGNA"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
     }
 }
