@@ -585,7 +585,7 @@ async function getBoletaPDF2(req, res, next) {
             result = await viewapi.getView(context, mapperViews.jsonViewMap[entityName]);
         };
 
-        let cadenacab = '', cadenapie = '', filename = '';
+        let cadenacab = '', cadenapie = '', cadenaley='', filename = '';
         let idLiq = 0;
 
         if (resultcab.rows.length = 1 && resultcab.rows.length > 0) {
@@ -598,10 +598,10 @@ async function getBoletaPDF2(req, res, next) {
             cadenacab += line['C5'] + '\n';
 
             idLiq = line['IDLIQ'];
-
-            cadenapie += line["HABTXT"].toString().padStart(79);
+            cadenapie += 'Sup. Gobierno de Tucumán  30-67542808-1' + '\n'
+            cadenapie += line["HABSLEYTXT"].toString().padStart(79);
             cadenapie += line["RETTXT"].toString().padStart(19) + '\n\n';
-            cadenapie += 'LIQUIDO: '.toString().padStart(79) + line["NETOTXT"].toString().padStart(19) + '\n';
+            cadenapie += 'LIQUIDO: '.toString().padStart(79) + line["LIQUIDOTXT"].toString().padStart(19) + '\n';
 
             filename = line['FILENAME'];
 
@@ -609,18 +609,27 @@ async function getBoletaPDF2(req, res, next) {
 
         let cadenadet = 'Cod Subcod  Descripción                      Cant        Vto            Haberes         Retenciones\n\n';
 
-        let hab = 0, ret = 0;
+        let hab = 0, ret = 0, ley = 0;
 
         if (result && result.rows.length > 0) {
 
             result.rows.forEach(element => {
-                cadenadet += element['CADENA'].replace('  0.00', '      ') + '\n';
-                hab += element['HABERES'];
-                ret += element['RETENCIONES'];
+	       if (element['ESLEY'] == 1) {
+          	        cadenaley += element['CADENA'].replace('  0.00', '      ') + '\n'
+          		ley += element['HABERES']
+        	} else {
+      			cadenadet += element['CADENA'].replace('  0.00', '      ') + '\n';
+                	hab += element['HABERES'];
+                	ret += element['RETENCIONES'];
+      		}
             });
+		
+	    if (cadenaley){
+	    	cadenadet += '\n'+cadenaley
+	    }
 
             const liquid = hab - ret;
-
+            
             cadenapie += '\nRECIBO NRO: '.padStart(77) + idLiq;
 
             const text = cadenacab + '\n' + cadenadet + '\n' + cadenapie;
@@ -640,20 +649,20 @@ async function getBoletaPDF2(req, res, next) {
 
             // Image
 
-            const pngUrl = './escudo.png'
+            const pngUrl = './Logo.png'
 
             const pngImageBytes = fs.readFileSync(pngUrl)
 
             const pngImage = await pdfDoc.embedPng(pngImageBytes)
 
-            const pngDims = pngImage.scale(1)
+            const pngDims = pngImage.scale(0.2)
 
             page.drawImage(pngImage, {
                 x: page.getWidth() / 2 - pngDims.width / 2,
                 y: (page.getHeight() - 20) / 2 - pngDims.height / 2 + 145,
                 width: pngDims.width,
                 height: pngDims.height,
-                opacity: 0.3,
+                opacity: 0.2,
                 blendMode: BlendMode.SoftLight
             });
 
