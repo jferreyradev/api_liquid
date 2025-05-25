@@ -333,5 +333,21 @@ module.exports.jsonStoreProcedure = {
         sp_name: "PKG_CARGA_FAMILIAR.SP_ASIGNA_SALARIO",
         in_param:["vIDCARGO","vASIGNA"],
         out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    ConceptoLiqIns:{
+        sp_name: "PKG_CONCEPTOLIQ.SPI_CONCEPTOLIQ",
+        in_param:["vIDCARGO", "vCODIGO", "vSUBCOD", "vPARM1", "vPARM2", "vVTO", "vIMPORTE", "vPERIODO","vIDGRUPOADI", "vPENLEY"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    ConceptoLiqUpd:{
+        sp_name: "PKG_CONCEPTOLIQ.SPU_CONCEPTOLIQ",
+        in_param:["vIDCONCEPTOLIQ","vIDCARGO", "vCODIGO", "vSUBCOD", "vPARM1", "vPARM2", "vVTO", "vIMPORTE", "vPERIODO","vIDGRUPOADI", "vPENLEY"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
+    },
+    ConceptoLiqDel:{
+        sp_name: "PKG_CONCEPTOLIQ.SPD_CONCEPTOLIQ",
+        in_param:["vIDCONCEPTOLIQ"],
+        out_param: ["vSALIDA","vError", "vErrorMsg"]
     }
+
 }
